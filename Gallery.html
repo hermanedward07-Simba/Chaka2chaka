@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gallery | Chaka to Chaka</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+/* ================= RESET ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#020617;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* ================= PARTICLES ================= */
+
+#particles{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-2;
+}
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(2,6,23,.48);
+    z-index:-1;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    width:100%;
+    height:70px;
+
+    position:fixed;
+    top:0;
+    left:0;
+
+    z-index:1000;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 6%;
+
+    background:rgba(2,6,23,.92);
+    backdrop-filter:blur(12px);
+
+    border-bottom:1px solid rgba(0,212,255,.15);
+}
+
+/* Logo */
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    text-decoration:none;
+    color:#fff;
+
+    font-size:19px;
+    font-weight:700;
+}
+
+.logo img{
+    width:42px;
+    height:42px;
+    object-fit:contain;
+}
+
+.logo span{
+    color:#00d4ff;
+}
+
+/* Navigation */
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:28px;
+}
+
+.nav-links a{
+    position:relative;
+
+    text-decoration:none;
+    color:#cbd5e1;
+
+    font-size:14px;
+    font-weight:500;
+
+    transition:.3s;
+}
+
+.nav-links a::after{
+    content:"";
+
+    position:absolute;
+    left:0;
+    bottom:-7px;
+
+    width:0;
+    height:2px;
+
+    background:#00d4ff;
+
+    box-shadow:0 0 8px #00d4ff;
+
+    transition:.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+    color:#00d4ff;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after{
+    width:100%;
+}
+
+/* Hamburger */
+
+.menu-btn{
+    display:none;
+
+    color:#00d4ff;
+    font-size:24px;
+
+    cursor:pointer;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    position:fixed;
+
+    top:0;
+    right:-280px;
+
+    width:270px;
+    height:100vh;
+
+    z-index:2000;
+
+    padding:80px 30px;
+
+    background:#020617;
+
+    border-left:1px solid rgba(0,212,255,.15);
+
+    transition:.35s;
+}
+
+.sidebar.active{
+    right:0;
+}
+
+.sidebar a{
+    display:block;
+
+    padding:14px 0;
+
+    color:#cbd5e1;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+    border-bottom:1px solid rgba(148,163,184,.08);
+
+    transition:.3s;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+    color:#00d4ff;
+}
+
+.close-btn{
+    position:absolute;
+
+    top:25px;
+    right:25px;
+
+    color:#00d4ff;
+
+    font-size:22px;
+
+    cursor:pointer;
+}
+
+.mobile-overlay{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+
+    z-index:1500;
+
+    display:none;
+}
+
+.mobile-overlay.active{
+    display:block;
+}
+
+/* ================= PAGE ================= */
+
+.gallery-page{
+    padding:110px 6% 60px;
+
+    min-height:100vh;
+}
+
+/* ================= HEADER ================= */
+
+.gallery-header{
+    text-align:center;
+
+    max-width:700px;
+
+    margin:0 auto 35px;
+}
+
+.gallery-header h1{
+    font-size:42px;
+
+    margin-bottom:10px;
+}
+
+.gallery-header h1 span{
+    color:#00d4ff;
+
+    text-shadow:
+        0 0 12px rgba(0,212,255,.5);
+}
+
+.gallery-header p{
+    color:#94a3b8;
+
+    font-size:13px;
+
+    line-height:1.8;
+}
+
+/* ================= CATEGORY FILTER ================= */
+
+.gallery-filter{
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-bottom:35px;
+}
+
+.filter-btn{
+    padding:9px 18px;
+
+    border-radius:30px;
+
+    border:1px solid rgba(0,212,255,.18);
+
+    background:rgba(15,23,42,.75);
+
+    color:#94a3b8;
+
+    font-family:'Poppins',sans-serif;
+
+    font-size:11px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.filter-btn:hover,
+.filter-btn.active{
+    color:#020617;
+
+    background:#00d4ff;
+
+    border-color:#00d4ff;
+
+    box-shadow:
+        0 0 10px rgba(0,212,255,.4),
+        0 0 25px rgba(0,212,255,.15);
+}
+
+/* ================= GALLERY GRID ================= */
+
+.gallery-grid{
+    max-width:1200px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:15px;
+}
+
+/* ================= PHOTO CARD ================= */
+
+.photo-card{
+    position:relative;
+
+    height:230px;
+
+    overflow:hidden;
+
+    border-radius:13px;
+
+    background:#0f172a;
+
+    border:1px solid rgba(0,212,255,.12);
+
+    cursor:pointer;
+
+    transition:.4s;
+}
+
+.photo-card:hover{
+    transform:translateY(-5px);
+
+    border-color:rgba(0,212,255,.5);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.35),
+        0 0 18px rgba(0,212,255,.12);
+}
+
+.photo-card img{
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+    transition:.5s;
+}
+
+.photo-card:hover img{
+    transform:scale(1.07);
+}
+
+/* ================= PHOTO OVERLAY ================= */
+
+.photo-overlay{
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    padding:40px 15px 15px;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(2,6,23,.95)
+        );
+
+    transition:.3s;
+}
+
+.photo-overlay h3{
+    font-size:13px;
+
+    margin-bottom:3px;
+}
+
+.photo-overlay p{
+    color:#94a3b8;
+
+    font-size:10px;
+}
+
+/* ================= EVENT LABEL ================= */
+
+.event-label{
+    position:absolute;
+
+    top:10px;
+    left:10px;
+
+    padding:5px 9px;
+
+    border-radius:20px;
+
+    background:rgba(2,6,23,.8);
+
+    border:1px solid rgba(0,212,255,.2);
+
+    color:#00d4ff;
+
+    font-size:9px;
+
+    backdrop-filter:blur(5px);
+}
+
+/* ================= EMPTY PHOTO PLACEHOLDER ================= */
+
+.photo-placeholder{
+    width:100%;
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0f172a,
+            #020617
+        );
+
+    color:#475569;
+}
+
+.photo-placeholder i{
+    font-size:35px;
+
+    margin-bottom:8px;
+
+    color:#00d4ff;
+
+    opacity:.65;
+}
+
+.photo-placeholder span{
+    font-size:10px;
+}
+
+/* ================= LIGHTBOX ================= */
+
+.lightbox{
+    position:fixed;
+
+    inset:0;
+
+    z-index:3000;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:30px;
+
+    background:rgba(0,0,0,.92);
+
+    backdrop-filter:blur(8px);
+}
+
+.lightbox.active{
+    display:flex;
+}
+
+.lightbox-content{
+    max-width:900px;
+    max-height:90vh;
+
+    position:relative;
+
+    text-align:center;
+}
+
+.lightbox img{
+    max-width:100%;
+    max-height:75vh;
+
+    border-radius:10px;
+
+    box-shadow:
+        0 0 40px rgba(0,212,255,.15);
+}
+
+.lightbox-title{
+    margin-top:12px;
+
+    font-size:14px;
+
+    color:#fff;
+}
+
+.lightbox-description{
+    margin-top:4px;
+
+    color:#94a3b8;
+
+    font-size:11px;
+}
+
+.close-lightbox{
+    position:fixed;
+
+    top:25px;
+    right:30px;
+
+    width:42px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    color:#fff;
+
+    background:rgba(15,23,42,.9);
+
+    border:1px solid rgba(0,212,255,.2);
+
+    cursor:pointer;
+
+    font-size:20px;
+
+    transition:.3s;
+}
+
+.close-lightbox:hover{
+    color:#00d4ff;
+
+    box-shadow:
+        0 0 15px rgba(0,212,255,.3);
+}
+
+/* ================= SOCIAL ICONS ================= */
+
+.social-section{
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+    margin-top:40px;
+}
+
+.social-section a{
+    width:43px;
+    height:43px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    text-decoration:none;
+
+    font-size:18px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    transition:.35s;
+}
+
+/* WhatsApp */
+
+.whatsapp{
+    color:#25D366;
+
+    background:rgba(37,211,102,.08);
+}
+
+.whatsapp:hover{
+    color:#fff;
+
+    background:#25D366;
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 0 10px #25D366,
+        0 0 25px #25D366,
+        0 0 45px rgba(37,211,102,.6);
+}
+
+/* Instagram */
+
+.instagram{
+    color:#ff4f9a;
+
+    background:rgba(225,48,108,.08);
+}
+
+.instagram:hover{
+    color:#fff;
+
+    background:#e1306c;
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 0 10px #e1306c,
+        0 0 25px #e1306c,
+        0 0 45px rgba(225,48,108,.6);
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    padding:25px 6%;
+
+    text-align:center;
+
+    color:#64748b;
+
+    font-size:11px;
+
+    border-top:1px solid rgba(0,212,255,.1);
+}
+
+footer span{
+    color:#00d4ff;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1000px){
+
+    .gallery-grid{
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+}
+
+@media(max-width:750px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .gallery-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .photo-card{
+        height:210px;
+    }
+
+    .gallery-header h1{
+        font-size:32px;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .gallery-page{
+        padding:100px 5% 45px;
+    }
+
+    .gallery-grid{
+        grid-template-columns:1fr 1fr;
+
+        gap:9px;
+    }
+
+    .photo-card{
+        height:165px;
+
+        border-radius:9px;
+    }
+
+    .photo-overlay{
+        padding:30px 9px 9px;
+    }
+
+    .photo-overlay h3{
+        font-size:10px;
+    }
+
+    .photo-overlay p{
+        font-size:8px;
+    }
+
+    .event-label{
+        top:6px;
+        left:6px;
+
+        font-size:7px;
+
+        padding:4px 7px;
+    }
+
+}
+
+/* Very small phones */
+
+@media(max-width:350px){
+
+    .gallery-grid{
+        grid-template-columns:1fr;
+    }
+
+    .photo-card{
+        height:220px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- ================= PARTICLES ================= -->
+
+<canvas id="particles"></canvas>
+
+<div class="overlay"></div>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <a href="index.html" class="logo">
+
+        <img
+            src="images/chaka-to-chaka-logo.png"
+            alt="Chaka to Chaka Logo"
+        >
+
+        Chaka <span>to Chaka</span>
+
+    </a>
+
+
+    <nav class="nav-links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="about.html">
+            Squad
+        </a>
+
+        <a href="Matches.html">
+            Schedule
+        </a>
+
+        <a href="Gallery.html" class="active">
+            Gallery
+        </a>
+
+        <a href="Request.html">
+            Request
+        </a>
+
+    </nav>
+
+
+    <div class="menu-btn" onclick="openSidebar()">
+
+        <i class="fa-solid fa-bars"></i>
+
+    </div>
+
+</header>
+
+
+<!-- ================= MOBILE SIDEBAR ================= -->
+
+<div
+    class="mobile-overlay"
+    id="overlay"
+    onclick="closeSidebar()">
+</div>
+
+
+<div class="sidebar" id="sidebar">
+
+    <div
+        class="close-btn"
+        onclick="closeSidebar()">
+
+        <i class="fa-solid fa-xmark"></i>
+
+    </div>
+
+
+    <a href="index.html">
+        Home
+    </a>
+
+    <a href="about.html">
+        Squad
+    </a>
+
+    <a href="Matches.html">
+        Schedule
+    </a>
+
+    <a href="Gallery.html" class="active">
+        Gallery
+    </a>
+
+    <a href="Request.html">
+        Request a Match
+    </a>
+
+</div>
+
+
+<!-- ================= GALLERY PAGE ================= -->
+
+<main class="gallery-page">
+
+
+    <!-- HEADER -->
+
+    <section class="gallery-header">
+
+        <h1>
+            Our <span>Memories</span>
+        </h1>
+
+        <p>
+            Relive the moments, matches, celebrations and
+            unforgettable experiences of Chaka to Chaka.
+            Every picture tells part of our journey.
+        </p>
+
+    </section>
+
+
+    <!-- ================= FILTER ================= -->
+
+    <div class="gallery-filter">
+
+        <button
+            class="filter-btn active"
+            onclick="filterGallery('all', this)">
+            All
+        </button>
+
+        <button
+            class="filter-btn"
+            onclick="filterGallery('matches', this)">
+            Matches
+        </button>
+
+        <button
+            class="filter-btn"
+            onclick="filterGallery('tournaments', this)">
+            Tournaments
+        </button>
+
+        <button
+            class="filter-btn"
+            onclick="filterGallery('training', this)">
+            Training
+        </button>
+
+        <button
+            class="filter-btn"
+            onclick="filterGallery('celebration', this)">
+            Celebrations
+        </button>
+
+        <button
+            class="filter-btn"
+            onclick="filterGallery('events', this)">
+            Events
+        </button>
+
+    </div>
+
+
+    <!-- ================= GALLERY ================= -->
+
+    <section class="gallery-grid" id="gallery">
+
+
+        <!-- PHOTO 1 -->
+
+        <div
+            class="photo-card"
+            data-category="matches"
+            onclick="openLightbox(
+                'images/gallery/match1.jpg',
+                'Match Day',
+                'Chaka to Chaka in action'
+            )">
+
+            <img
+                src="images/gallery/match1.jpg"
+                alt="Match Day"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            >
+
+            <div class="photo-placeholder" style="display:none;">
+                <i class="fa-solid fa-image"></i>
+                <span>Add match1.jpg</span>
+            </div>
+
+            <div class="event-label">
+                Match
+            </div>
+
+            <div class="photo-overlay">
+
+                <h3>
+                    Match Day
+                </h3>
+
+                <p>
+                    Chaka to Chaka in action
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- PHOTO 2 -->
+
+        <div
+            class="photo-card"
+            data-category="tournaments"
+            onclick="openLightbox(
+                'images/gallery/tournament1.jpg',
+                'Tournament',
+                'Tournament memories'
+            )">
+
+            <img
+                src="images/gallery/tournament1.jpg"
+                alt="Tournament"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            >
+
+            <div class="photo-placeholder" style="display:none;">
+                <i class="fa-solid fa-trophy"></i>
+                <span>Add tournament1.jpg</span>
+            </div>
+
+            <div class="event-label">
+                Tournament
+            </div>
+
+            <div class="photo-overlay">
+
+                <h3>
+                    Tournament Day
+                </h3>
+
+                <p>
+                    Competing for victory
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- PHOTO 3 -->
+
+        <div
+            class="photo-card"
+            data-category="training"
+            onclick="openLightbox(
+                'images/gallery/training1.jpg',
+                'Training Session',
+                'Preparing for the next challenge'
+            )">
+
+            <img
+                src="images/gallery/training1.jpg"
+                alt="Training"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            >
+
+            <div class="photo-placeholder" style="display:none;">
+                <i class="fa-solid fa-dumbbell"></i>
+                <span>Add training1.jpg</span>
+            </div>
+
+            <div class="event-label">
+                Training
+            </div>
+
+            <div class="photo-overlay">
+
+                <h3>
+                    Training Session
+                </h3>
+
+                <p>
+                    Preparing for the next challenge
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- PHOTO 4 -->
+
+        <div
+            class="photo-card"
+            data-category="celebration"
+            onclick="openLightbox(
+                'images/gallery/celebration1.jpg',
+                'Victory Celebration',
+                'Celebrating together'
+            )">
+
+            <img
+                src="images/gallery/celebration1.jpg"
+                alt="Celebration"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            >
+
+            <div class="photo-placeholder" style="display:none;">
+                <i class="fa-solid fa-champagne-glasses"></i>
+                <span>Add celebration1.jpg</span>
+            </div>
+
+            <div class="event-label">
+                Celebration
+            </div>
+
+            <div class="photo-overlay">
+
+                <h3>
+                    Victory Celebration
+                </h3>
+
+                <p>
+                    Celebrating together
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- PHOTO 5 -->
+
+        <div
+            class="photo-card"
+            data-category="matches"
+            onclick="openLightbox(
+                'images/gallery/match2.jpg',
+                'Game Time',
+                'Another memorable match'
+            )">
+
+            <img
+                src="images/gallery/match2.jpg"
+                alt="Game Time"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            >
+
+            <div class="photo-placeholder" style="display:none;">
+                <i class="fa-solid fa-volleyball"></i>
+                <span>Add match2.jpg</span>
+            </div>
+
+            <div class="event-label">
+                Match
+            </div>
+
+            <div class="photo-overlay">
+
+                <h3>
+                    Game Time
+                </h3>
+
+                <p>
+                    Another memorable match
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- PHOTO 6 -->
+
+        <div
+            class="photo-card"
+            data-category="events"
+            onclick="openLightbox(
+                'images/gallery/event1.jpg',
+                'Team Event',
+                'A special Chaka to Chaka event'
+            )">
+
+            <img
+                src="images/gallery/event1.jpg"
+                alt="Team Event"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            >
+
+            <div class="photo-placeholder" style="display:none;">
+                <i class="fa-solid fa-users"></i>
+                <span>Add event1.jpg</span>
+            </div>
+
+            <div class="event-label">
+                Event
+            </div>
+
+            <div class="photo-overlay">
+
+                <h3>
+                    Team Event
+                </h3>
+
+                <p>
+                    A special Chaka to Chaka event
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- PHOTO 7 -->
+
+        <div
+            class="photo-card"
+            data-category="training"
+            onclick="openLightbox(
+                'images/gallery/training2.jpg',
+                'Team Training',
+                'Working together as a team'
+            )">
+
+            <img
+                src="images/gallery/training2.jpg"
+                alt="Team Training"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            >
+
+            <div class="photo-placeholder" style="display:none;">
+                <i class="fa-solid fa-person-running"></i>
+                <span>Add training2.jpg</span>
+            </div>
+
+            <div class="event-label">
+                Training
+            </div>
+
+            <div class="photo-overlay">
+
+                <h3>
+                    Team Training
+                </h3>
+
+                <p>
+                    Working together as a team
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- PHOTO 8 -->
+
+        <div
+            class="photo-card"
+            data-category="tournaments"
+            onclick="openLightbox(
+                'images/gallery/tournament2.jpg',
+                'Championship',
+                'A memorable tournament experience'
+            )">
+
+            <img
+                src="images/gallery/tournament2.jpg"
+                alt="Championship"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            >
+
+            <div class="photo-placeholder" style="display:none;">
+                <i class="fa-solid fa-medal"></i>
+                <span>Add tournament2.jpg</span>
+            </div>
+
+            <div class="event-label">
+                Tournament
+            </div>
+
+            <div class="photo-overlay">
+
+                <h3>
+                    Championship
+                </h3>
+
+                <p>
+                    A memorable tournament experience
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- ================= SOCIAL ================= -->
+
+    <div class="social-section">
+
+        <a
+            href="https://wa.me/255700000000"
+            target="_blank"
+            class="whatsapp"
+            title="WhatsApp">
+
+            <i class="fa-brands fa-whatsapp"></i>
+
+        </a>
+
+
+        <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            class="instagram"
+            title="Instagram">
+
+            <i class="fa-brands fa-instagram"></i>
+
+        </a>
+
+    </div>
+
+
+</main>
+
+
+<!-- ================= LIGHTBOX ================= -->
+
+<div
+    class="lightbox"
+    id="lightbox"
+    onclick="closeLightbox(event)"
+>
+
+    <button
+        class="close-lightbox"
+        onclick="closeLightbox()">
+
+        <i class="fa-solid fa-xmark"></i>
+
+    </button>
+
+
+    <div class="lightbox-content">
+
+        <img
+            id="lightboxImage"
+            src=""
+            alt=""
+        >
+
+        <div
+            class="lightbox-title"
+            id="lightboxTitle">
+        </div>
+
+        <div
+            class="lightbox-description"
+            id="lightboxDescription">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    © 2026
+    <span>Chaka to Chaka</span>.
+    All Rights Reserved.
+
+</footer>
+
+
+<script>
+
+/* ================= SIDEBAR ================= */
+
+function openSidebar(){
+
+    document
+    .getElementById("sidebar")
+    .classList.add("active");
+
+    document
+    .getElementById("overlay")
+    .classList.add("active");
+
+}
+
+
+function closeSidebar(){
+
+    document
+    .getElementById("sidebar")
+    .classList.remove("active");
+
+    document
+    .getElementById("overlay")
+    .classList.remove("active");
+
+}
+
+
+/* ================= FILTER GALLERY ================= */
+
+function filterGallery(category, button){
+
+    const cards =
+        document.querySelectorAll(".photo-card");
+
+    const buttons =
+        document.querySelectorAll(".filter-btn");
+
+
+    buttons.forEach(btn => {
+
+        btn.classList.remove("active");
+
+    });
+
+
+    button.classList.add("active");
+
+
+    cards.forEach(card => {
+
+        if(
+            category === "all" ||
+            card.dataset.category === category
+        ){
+
+            card.style.display = "block";
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* ================= LIGHTBOX ================= */
+
+function openLightbox(image, title, description){
+
+    const lightbox =
+        document.getElementById("lightbox");
+
+    const lightboxImage =
+        document.getElementById("lightboxImage");
+
+    const lightboxTitle =
+        document.getElementById("lightboxTitle");
+
+    const lightboxDescription =
+        document.getElementById("lightboxDescription");
+
+
+    lightboxImage.src = image;
+
+    lightboxTitle.textContent = title;
+
+    lightboxDescription.textContent =
+        description;
+
+
+    lightbox.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+
+}
+
+
+function closeLightbox(event){
+
+    if(
+        event &&
+        event.target.closest(".lightbox-content") &&
+        !event.target.closest(".close-lightbox")
+    ){
+
+        return;
+
+    }
+
+
+    document
+        .getElementById("lightbox")
+        .classList.remove("active");
+
+    document.body.style.overflow = "auto";
+
+}
+
+
+/* ================= ESCAPE LIGHTBOX ================= */
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key === "Escape"){
+
+            closeLightbox();
+
+        }
+
+    }
+);
+
+
+/* ================= PARTICLES ================= */
+
+const canvas =
+    document.getElementById("particles");
+
+const ctx =
+    canvas.getContext("2d");
+
+let particles = [];
+
+
+function resizeCanvas(){
+
+    canvas.width =
+        window.innerWidth;
+
+    canvas.height =
+        window.innerHeight;
+
+}
+
+resizeCanvas();
+
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+
+for(let i = 0; i < 70; i++){
+
+    particles.push({
+
+        x:
+            Math.random() *
+            canvas.width,
+
+        y:
+            Math.random() *
+            canvas.height,
+
+        size:
+            Math.random() * 2 + .5,
+
+        speedX:
+            (Math.random() - .5) * .4,
+
+        speedY:
+            (Math.random() - .5) * .4
+
+    });
+
+}
+
+
+function animateParticles(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    particles.forEach(p => {
+
+        p.x += p.speedX;
+
+        p.y += p.speedY;
+
+
+        if(
+            p.x < 0 ||
+            p.x > canvas.width
+        ){
+
+            p.speedX *= -1;
+
+        }
+
+
+        if(
+            p.y < 0 ||
+            p.y > canvas.height
+        ){
+
+            p.speedY *= -1;
+
+        }
+
+
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x,
+            p.y,
+            p.size,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle =
+            "rgba(0,212,255,.45)";
+
+        ctx.fill();
+
+    });
+
+
+    requestAnimationFrame(
+        animateParticles
+    );
+
+}
+
+animateParticles();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chaka to Chaka | Dashboard</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #020617;
+            color: white;
+            overflow-x: hidden;
+        }
+
+
+        /* =========================================================
+           PARTICLES
+        ========================================================= */
+
+        #particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -2;
+        }
+
+
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 0 20px;
+
+            backdrop-filter: blur(12px);
+            background: rgba(2, 6, 23, 0.75);
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+            z-index: 1000;
+        }
+
+
+        /* =========================================================
+           LOGO / TEAM BRAND
+        ========================================================= */
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+
+            object-fit: contain;
+
+            border-radius: 50%;
+        }
+
+        .logo {
+            color: #38bdf8;
+            font-weight: 600;
+            font-size: 1.25rem;
+            letter-spacing: .3px;
+        }
+
+        .logo span {
+            color: white;
+            font-weight: 400;
+        }
+
+
+        /* =========================================================
+           NAV LINKS
+        ========================================================= */
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            padding: 8px 18px;
+            border-radius: 30px;
+
+            border: 1px solid transparent;
+
+            font-size: .9rem;
+            color: #cbd5e1;
+
+            text-decoration: none;
+            transition: .3s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+
+            border: 1px solid rgba(56, 189, 248, .5);
+
+            background: rgba(56, 189, 248, .1);
+
+            box-shadow: 0 0 10px rgba(56, 189, 248, .3);
+
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: linear-gradient(
+                135deg,
+                #38bdf8,
+                #6366f1
+            );
+
+            color: white;
+
+            box-shadow: 0 0 15px rgba(56, 189, 248, .5);
+        }
+
+
+        /* =========================================================
+           MOBILE MENU BUTTON
+        ========================================================= */
+
+        .menu-btn {
+            position: fixed;
+
+            top: 24px;
+            right: 20px;
+
+            width: 30px;
+            height: 22px;
+
+            display: none;
+
+            flex-direction: column;
+            justify-content: space-between;
+
+            cursor: pointer;
+
+            z-index: 2000;
+        }
+
+        .menu-btn span {
+            display: block;
+
+            height: 3px;
+            width: 100%;
+
+            background: white;
+
+            border-radius: 5px;
+
+            transition: .4s;
+        }
+
+        .menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+
+        /* =========================================================
+           OVERLAY
+        ========================================================= */
+
+        .overlay {
+            position: fixed;
+
+            width: 100%;
+            height: 100%;
+
+            background: rgba(0, 0, 0, .6);
+
+            backdrop-filter: blur(5px);
+
+            top: 0;
+            left: 0;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition: .3s;
+
+            z-index: 1400;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+
+        /* =========================================================
+           MOBILE SIDEBAR
+        ========================================================= */
+
+        .sidebar {
+            position: fixed;
+
+            top: 0;
+            right: -100%;
+
+            width: 260px;
+            height: 100%;
+
+            background: rgba(2, 6, 23, .96);
+
+            backdrop-filter: blur(15px);
+
+            padding: 100px 30px;
+
+            transition: .4s ease;
+
+            z-index: 1500;
+
+            box-shadow: -5px 0 20px rgba(0, 0, 0, .5);
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar a {
+            display: block;
+
+            margin: 20px 0;
+
+            color: #cbd5e1;
+
+            text-decoration: none;
+
+            font-size: 1rem;
+
+            transition: .3s;
+        }
+
+        .sidebar a:hover {
+            color: #38bdf8;
+
+            transform: translateX(5px);
+        }
+
+
+        /* =========================================================
+           DASHBOARD
+        ========================================================= */
+
+        .dashboard {
+            max-width: 1400px;
+
+            margin: auto;
+
+            padding: 110px 30px 50px;
+        }
+
+
+        /* =========================================================
+           DASHBOARD HEADER
+        ========================================================= */
+
+        .dashboard-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 30px;
+        }
+
+        .dashboard-title h1 {
+            font-size: 2rem;
+
+            font-weight: 600;
+        }
+
+        .dashboard-title h1 span {
+            color: #38bdf8;
+        }
+
+        .dashboard-title p {
+            color: #94a3b8;
+
+            font-size: .85rem;
+
+            margin-top: 5px;
+        }
+
+        .dashboard-date {
+            color: #94a3b8;
+
+            font-size: .8rem;
+
+            padding: 10px 15px;
+
+            border: 1px solid rgba(255, 255, 255, .1);
+
+            border-radius: 25px;
+
+            background: rgba(255, 255, 255, .03);
+        }
+
+
+        /* =========================================================
+           STATISTICS
+        ========================================================= */
+
+        .stats-grid {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 22px;
+        }
+
+        .stat-card {
+            position: relative;
+
+            background: rgba(255, 255, 255, .05);
+
+            border: 1px solid rgba(255, 255, 255, .08);
+
+            border-radius: 16px;
+
+            padding: 20px;
+
+            overflow: hidden;
+
+            transition: .3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+
+            border-color: rgba(56, 189, 248, .35);
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        }
+
+        .stat-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 80px;
+            height: 80px;
+
+            border-radius: 50%;
+
+            background: rgba(56, 189, 248, .08);
+
+            right: -25px;
+            top: -25px;
+        }
+
+        .stat-top {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        .stat-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 11px;
+
+            background: rgba(56, 189, 248, .1);
+
+            color: #38bdf8;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 17px;
+        }
+
+        .stat-card p {
+            color: #94a3b8;
+
+            font-size: .75rem;
+
+            margin-top: 14px;
+        }
+
+        .stat-card h2 {
+            font-size: 1.7rem;
+
+            margin-top: 3px;
+        }
+
+        .stat-card small {
+            color: #38bdf8;
+
+            font-size: .65rem;
+        }
+
+
+        /* =========================================================
+           MAIN GRID
+        ========================================================= */
+
+        .main-grid {
+            display: grid;
+
+            grid-template-columns: 1.35fr 1fr;
+
+            gap: 20px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* =========================================================
+           GENERAL CARD
+        ========================================================= */
+
+        .card {
+            background: rgba(255, 255, 255, .05);
+
+            border: 1px solid rgba(255, 255, 255, .08);
+
+            border-radius: 16px;
+
+            padding: 22px;
+
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .15);
+        }
+
+        .card-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 18px;
+        }
+
+        .card-header h3 {
+            font-size: .95rem;
+
+            font-weight: 500;
+        }
+
+        .card-header a {
+            color: #38bdf8;
+
+            font-size: .68rem;
+
+            text-decoration: none;
+        }
+
+        .card-header a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================================================
+           NEXT MATCH
+        ========================================================= */
+
+        .next-match {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(56, 189, 248, .12),
+                    rgba(99, 102, 241, .1)
+                );
+
+            border: 1px solid rgba(56, 189, 248, .15);
+
+            border-radius: 14px;
+
+            padding: 22px;
+        }
+
+        .match-status {
+            display: flex;
+
+            justify-content: center;
+
+            margin-bottom: 10px;
+        }
+
+        .status {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 5px 11px;
+
+            border-radius: 20px;
+
+            background: rgba(56, 189, 248, .1);
+
+            color: #38bdf8;
+
+            font-size: .62rem;
+        }
+
+        .status i {
+            font-size: .45rem;
+        }
+
+        .match-date {
+            text-align: center;
+
+            color: #94a3b8;
+
+            font-size: .7rem;
+
+            margin-bottom: 22px;
+        }
+
+        .teams {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 45px;
+        }
+
+        .team {
+            text-align: center;
+
+            min-width: 120px;
+        }
+
+
+        /* =========================================================
+           TEAM LOGO IMAGE
+           
+           To insert a real logo:
+           
+           <img src="images/chaka-logo.png"
+                alt="Chaka to Chaka"
+                class="team-logo-image">
+           
+           Change the filename/path to your image.
+        ========================================================= */
+
+        .team-logo-image {
+            width: 70px;
+            height: 70px;
+
+            margin: auto;
+
+            display: block;
+
+            object-fit: contain;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, .05);
+
+            border: 1px solid rgba(56, 189, 248, .2);
+
+            padding: 5px;
+
+            box-shadow:
+                0 0 20px rgba(56, 189, 248, .2);
+        }
+
+
+        /* OPTIONAL DEFAULT ICON LOGO */
+
+        .team-logo {
+            width: 65px;
+            height: 65px;
+
+            margin: auto;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #38bdf8,
+                    #6366f1
+                );
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+
+            box-shadow:
+                0 0 20px rgba(56, 189, 248, .25);
+        }
+
+        .team-logo.opponent {
+            background:
+                linear-gradient(
+                    135deg,
+                    #334155,
+                    #475569
+                );
+        }
+
+        .team h4 {
+            margin-top: 9px;
+
+            font-size: .75rem;
+
+            font-weight: 500;
+        }
+
+        .vs {
+            font-size: .75rem;
+
+            color: #38bdf8;
+
+            font-weight: 600;
+        }
+
+        .match-location {
+            text-align: center;
+
+            color: #94a3b8;
+
+            font-size: .65rem;
+
+            margin-top: 20px;
+        }
+
+        .match-location i {
+            color: #38bdf8;
+
+            margin-right: 5px;
+        }
+
+
+        /* =========================================================
+           UPCOMING FIXTURES
+        ========================================================= */
+
+        .fixture {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 13px 0;
+
+            border-bottom: 1px solid rgba(255, 255, 255, .07);
+        }
+
+        .fixture:last-child {
+            border-bottom: none;
+        }
+
+        .fixture-date {
+            width: 45px;
+
+            text-align: center;
+
+            border-radius: 9px;
+
+            padding: 6px 2px;
+
+            background: rgba(56, 189, 248, .08);
+        }
+
+        .fixture-date strong {
+            display: block;
+
+            color: #38bdf8;
+
+            font-size: .9rem;
+        }
+
+        .fixture-date span {
+            color: #94a3b8;
+
+            font-size: .55rem;
+
+            text-transform: uppercase;
+        }
+
+        .fixture-info {
+            flex: 1;
+        }
+
+        .fixture-info strong {
+            display: block;
+
+            font-size: .7rem;
+
+            font-weight: 500;
+        }
+
+        .fixture-info span {
+            display: block;
+
+            color: #64748b;
+
+            font-size: .58rem;
+
+            margin-top: 3px;
+        }
+
+        .fixture-time {
+            font-size: .65rem;
+
+            color: #cbd5e1;
+        }
+
+
+        /* =========================================================
+           RECENT RESULTS
+        ========================================================= */
+
+        .results-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 20px;
+
+            margin-bottom: 20px;
+        }
+
+        .result {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 12px 0;
+
+            border-bottom: 1px solid rgba(255, 255, 255, .07);
+        }
+
+        .result:last-child {
+            border-bottom: none;
+        }
+
+        .result-info strong {
+            display: block;
+
+            font-size: .68rem;
+
+            font-weight: 500;
+        }
+
+        .result-info span {
+            display: block;
+
+            color: #64748b;
+
+            font-size: .55rem;
+
+            margin-top: 3px;
+        }
+
+        .result-right {
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+        }
+
+        .score {
+            font-size: .75rem;
+
+            font-weight: 600;
+        }
+
+        .badge {
+            font-size: .5rem;
+
+            padding: 4px 7px;
+
+            border-radius: 12px;
+        }
+
+        .badge.win {
+            color: #38bdf8;
+
+            background: rgba(56, 189, 248, .1);
+        }
+
+        .badge.loss {
+            color: #f87171;
+
+            background: rgba(248, 113, 113, .1);
+        }
+
+
+        /* =========================================================
+           BOTTOM GRID
+        ========================================================= */
+
+        .bottom-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 20px;
+        }
+
+
+        /* =========================================================
+           PLAYERS
+        ========================================================= */
+
+        .player {
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            padding: 10px 0;
+
+            border-bottom: 1px solid rgba(255, 255, 255, .07);
+        }
+
+        .player:last-child {
+            border-bottom: none;
+        }
+
+        .player-avatar {
+            width: 37px;
+            height: 37px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(56, 189, 248, .2),
+                    rgba(99, 102, 241, .2)
+                );
+
+            border: 1px solid rgba(56, 189, 248, .2);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: #38bdf8;
+
+            font-size: .65rem;
+
+            font-weight: 600;
+        }
+
+        .player-info {
+            flex: 1;
+        }
+
+        .player-info strong {
+            display: block;
+
+            font-size: .68rem;
+
+            font-weight: 500;
+        }
+
+        .player-info span {
+            color: #64748b;
+
+            font-size: .55rem;
+        }
+
+        .player-number {
+            color: #38bdf8;
+
+            font-size: .7rem;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================================================
+           ACHIEVEMENTS
+        ========================================================= */
+
+        .achievement {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 10px 0;
+
+            border-bottom: 1px solid rgba(255, 255, 255, .07);
+        }
+
+        .achievement:last-child {
+            border-bottom: none;
+        }
+
+        .trophy {
+            width: 37px;
+            height: 37px;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: #38bdf8;
+
+            background: rgba(56, 189, 248, .08);
+        }
+
+        .achievement-info {
+            flex: 1;
+        }
+
+        .achievement-info strong {
+            display: block;
+
+            font-size: .68rem;
+
+            font-weight: 500;
+        }
+
+        .achievement-info span {
+            color: #64748b;
+
+            font-size: .55rem;
+        }
+
+
+        /* =========================================================
+           QUICK ACTIONS
+        ========================================================= */
+
+        .quick-actions {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 10px;
+
+            margin-top: 20px;
+        }
+
+        .action {
+            text-decoration: none;
+
+            color: #cbd5e1;
+
+            padding: 13px 8px;
+
+            text-align: center;
+
+            border: 1px solid rgba(255, 255, 255, .08);
+
+            background: rgba(255, 255, 255, .03);
+
+            border-radius: 10px;
+
+            transition: .3s;
+        }
+
+        .action:hover {
+            color: white;
+
+            border-color: rgba(56, 189, 248, .4);
+
+            background: rgba(56, 189, 248, .08);
+
+            transform: translateY(-3px);
+        }
+
+        .action i {
+            display: block;
+
+            color: #38bdf8;
+
+            font-size: 15px;
+
+            margin-bottom: 6px;
+        }
+
+        .action span {
+            font-size: .58rem;
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            text-align: center;
+
+            padding: 25px 20px;
+
+            margin-top: 20px;
+
+            color: #64748b;
+
+            font-size: .65rem;
+
+            border-top: 1px solid rgba(255, 255, 255, .07);
+        }
+
+        footer span {
+            color: #38bdf8;
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 1100px) {
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .main-grid,
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-btn {
+                display: flex;
+            }
+
+            .dashboard {
+                padding: 100px 18px 40px;
+            }
+
+            .dashboard-header {
+                align-items: flex-start;
+            }
+
+            .dashboard-date {
+                display: none;
+            }
+
+            .dashboard-title h1 {
+                font-size: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+
+                gap: 12px;
+            }
+
+            .stat-card {
+                padding: 15px;
+            }
+
+            .stat-card h2 {
+                font-size: 1.35rem;
+            }
+
+            .teams {
+                gap: 20px;
+            }
+
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+
+        @media (max-width: 480px) {
+
+            .brand-logo {
+                width: 36px;
+                height: 36px;
+            }
+
+            .logo {
+                font-size: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stat-card p {
+                font-size: .65rem;
+            }
+
+            .stat-card h2 {
+                font-size: 1.2rem;
+            }
+
+            .stat-icon {
+                width: 36px;
+                height: 36px;
+
+                font-size: 14px;
+            }
+
+            .teams {
+                gap: 10px;
+            }
+
+            .team {
+                min-width: 95px;
+            }
+
+            .team-logo-image {
+                width: 55px;
+                height: 55px;
+            }
+
+            .team-logo {
+                width: 55px;
+                height: 55px;
+
+                font-size: 20px;
+            }
+
+            .team h4 {
+                font-size: .65rem;
+            }
+
+            .vs {
+                font-size: .65rem;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         PARTICLES
+    ========================================================= -->
+
+    <canvas id="particles"></canvas>
+
+
+    <!-- =========================================================
+         NAVBAR
+    ========================================================= -->
+
+    <nav class="navbar">
+
+        <!-- TEAM LOGO + NAME -->
+
+        <a href="index.html" class="brand">
+
+            <!--
+                INSERT YOUR TEAM LOGO HERE
+
+                Example:
+                images/chaka-logo.png
+            -->
+
+            <img src="Chaka tu chaka.png"
+                alt="Chaka to Chaka Logo"
+                class="brand-logo">
+
+            <div class="logo">
+                Chaka <span>to Chaka</span>
+            </div>
+
+        </a>
+
+
+        <!-- NAVIGATION -->
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="index.html" class="active">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="about.html">
+                    Squad
+                </a>
+            </li>
+
+            <li>
+                <a href="Matches.html">
+                    Schedule
+                </a>
+            </li>
+
+            <li>
+                <a href="Gallery.html">
+                    Gallery
+                </a>
+            </li>
+
+            <li>
+                <a href="Request.html">
+                    Request
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- =========================================================
+         MOBILE MENU BUTTON
+    ========================================================= -->
+
+    <div class="menu-btn" id="menuBtn">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+
+    <!-- =========================================================
+         OVERLAY
+    ========================================================= -->
+
+    <div class="overlay" id="overlay"></div>
+
+
+    <!-- =========================================================
+         MOBILE SIDEBAR
+    ========================================================= -->
+
+    <div class="sidebar" id="sidebar">
+
+        <a href="index.html">
+
+            <i class="fa-solid fa-house"></i>
+
+            &nbsp; Home
+
+        </a>
+
+
+        <a href="about.html">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+            &nbsp; Squad Roster
+
+        </a>
+
+
+        <a href="Matches.html">
+
+            <i class="fa-solid fa-volleyball"></i>
+
+            &nbsp; Match Schedule
+
+        </a>
+
+
+        <a href="Gallery.html">
+
+            <i class="fa-solid fa-volleyball"></i>
+
+            &nbsp; Gallery
+
+        </a>
+
+
+        <a href="Request.html">
+
+            <i class="fa-solid fa-envelope"></i>
+
+            &nbsp; Request Match
+
+        </a>
+
+    </div>
+
+
+    <!-- =========================================================
+         DASHBOARD
+    ========================================================= -->
+
+    <main class="dashboard">
+
+
+        <!-- =====================================================
+             DASHBOARD HEADER
+        ====================================================== -->
+
+        <div class="dashboard-header">
+
+            <div class="dashboard-title">
+
+                <h1>
+
+                    Welcome to
+
+                    <span>
+                        Chaka to Chaka
+                    </span>
+
+                </h1>
+
+                <p>
+                    Volleyball Team Dashboard
+                </p>
+
+            </div>
+
+
+            <div class="dashboard-date">
+
+                <i class="fa-regular fa-calendar"></i>
+
+                &nbsp; 2026 Season
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             STATISTICS
+        ====================================================== -->
+
+        <div class="stats-grid">
+
+
+            <!-- TOTAL PLAYERS -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <p>
+                            Total Players
+                        </p>
+
+                        <h2>
+                            12
+                        </h2>
+
+                        <small>
+                            Active squad
+                        </small>
+
+                    </div>
+
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-users"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MATCHES PLAYED -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <p>
+                            Matches Played
+                        </p>
+
+                        <h2>
+                            5
+                        </h2>
+
+                        <small>
+                            2026 Season
+                        </small>
+
+                    </div>
+
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-volleyball"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MATCHES WON -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <p>
+                            Matches Won
+                        </p>
+
+                        <h2>
+                            4
+                        </h2>
+
+                        <small>
+                            80% win rate
+                        </small>
+
+                    </div>
+
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-trophy"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MATCHES LOST -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+
+                        <p>
+                            Matches Lost
+                        </p>
+
+                        <h2>
+                            1
+                        </h2>
+
+                        <small>
+                            2026 Season
+                        </small>
+
+                    </div>
+
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =====================================================
+             NEXT MATCH + UPCOMING FIXTURES
+        ====================================================== -->
+
+        <div class="main-grid">
+
+
+            <!-- =================================================
+                 NEXT MATCH
+            ================================================== -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h3>
+
+                        <i class="fa-solid fa-volleyball"></i>
+
+                        &nbsp; Next Match
+
+                    </h3>
+
+
+                    <a href="#">
+                        View Details
+                    </a>
+
+                </div>
+
+
+                <div class="next-match">
+
+
+                    <div class="match-status">
+
+                        <div class="status">
+
+                            <i class="fa-solid fa-circle"></i>
+
+                            UPCOMING
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-date">
+
+                        Saturday, 25 September 2026
+
+                        &nbsp; • &nbsp;
+
+                        16:00
+
+                    </div>
+
+
+                    <div class="teams">
+
+
+                        <!-- =================================================
+                             CHAKA TO CHAKA TEAM
+                        ================================================== -->
+
+                        <div class="team">
+
+
+                            <!--
+                                INSERT CHAKA TO CHAKA LOGO
+
+                                Change:
+                                images/chaka-logo.png
+
+                                to your actual logo path.
+                            -->
+
+                            <img src="Chaka tu chaka.png"
+                                alt="Chaka to Chaka"
+                                class="team-logo-image">
+
+
+                            <h4>
+                                Chaka to Chaka
+                            </h4>
+
+                        </div>
+
+
+                        <!-- VS -->
+
+                        <div class="vs">
+                            VS
+                        </div>
+
+
+                        <!-- =================================================
+                             OPPONENT TEAM
+                        ================================================== -->
+
+                        <div class="team">
+
+
+                            <!--
+                                INSERT OPPONENT LOGO
+
+                                Example:
+                                images/high-voltage-logo.png
+                            -->
+
+                            <img src="high.jpg"
+                                alt="High Voltage"
+                                class="team-logo-image">
+
+
+                            <h4>
+                                High Voltage
+                            </h4>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="match-location">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        UDSM Stadium
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 UPCOMING FIXTURES
+            ================================================== -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h3>
+                        Upcoming Fixtures
+                    </h3>
+
+
+                    <a href="#">
+                        View All
+                    </a>
+
+                </div>
+
+
+                <!-- FIXTURE 1 -->
+
+                <div class="fixture">
+
+                    <div class="fixture-date">
+
+                        <strong>
+                            25
+                        </strong>
+
+                        <span>
+                            Sep
+                        </span>
+
+                    </div>
+
+
+                    <div class="fixture-info">
+
+                        <strong>
+                            Chaka to Chaka vs High Voltage
+                        </strong>
+
+                        <span>
+                            UDSM Stadium
+                        </span>
+
+                    </div>
+
+
+                    <div class="fixture-time">
+                        16:00
+                    </div>
+
+                </div>
+
+
+                <!-- FIXTURE 2 -->
+
+                <div class="fixture">
+
+                    <div class="fixture-date">
+
+                        <strong>
+                            29
+                        </strong>
+
+                        <span>
+                            Sep
+                        </span>
+
+                    </div>
+
+
+                    <div class="fixture-info">
+
+                        <strong>
+                            Chaka to Chaka vs Bandari VC
+                        </strong>
+
+                        <span>
+                            Bandari Stadium
+                        </span>
+
+                    </div>
+
+
+                    <div class="fixture-time">
+                        16:00
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             RECENT RESULTS
+        ====================================================== -->
+
+        <div class="results-grid">
+
+
+            <!-- =================================================
+                 RECENT RESULTS
+            ================================================== -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h3>
+                        Recent Results
+                    </h3>
+
+
+                    <a href="#">
+                        View All
+                    </a>
+
+                </div>
+
+
+                <!-- RESULT 1 -->
+
+                <div class="result">
+
+                    <div class="result-info">
+
+                        <strong>
+                            Chaka to Chaka vs DUCE
+                        </strong>
+
+                        <span>
+                            30 August 2026
+                        </span>
+
+                    </div>
+
+
+                    <div class="result-right">
+
+                        <span class="score">
+                            3 - 1
+                        </span>
+
+                        <span class="badge win">
+                            WIN
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RESULT 2 -->
+
+                <div class="result">
+
+                    <div class="result-info">
+
+                        <strong>
+                            Bagamoyo VC VC vs Chaka to Chaka
+                        </strong>
+
+                        <span>
+                            16 August 2026
+                        </span>
+
+                    </div>
+
+
+                    <div class="result-right">
+
+                        <span class="score">
+                            2 - 3
+                        </span>
+
+                        <span class="badge win">
+                            WIN
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 TEAM SUMMARY
+            ================================================== -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h3>
+
+                        <i class="fa-solid fa-volleyball"></i>
+
+                        &nbsp; Team Summary
+
+                    </h3>
+
+                </div>
+
+
+                <div class="next-match">
+
+                    <div class="teams">
+
+
+                        <div class="team">
+
+                            <img src="Chaka tu chaka.png"
+                                alt="Chaka to Chaka"
+                                class="team-logo-image">
+
+                            <h4>
+                                Chaka to Chaka
+                            </h4>
+
+                        </div>
+
+
+                        <div class="vs">
+                            2026
+                        </div>
+
+
+                        <div class="team">
+
+                            <div class="team-logo">
+
+                                <i class="fa-solid fa-trophy"></i>
+
+                            </div>
+
+                            <h4>
+                                5 Wins
+                            </h4>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="match-location">
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                        70.8% Win Rate
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =====================================================
+             SQUAD + ACHIEVEMENTS
+        ====================================================== -->
+
+        <div class="bottom-grid">
+
+
+            <!-- =================================================
+                 SQUAD OVERVIEW
+            ================================================== -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h3>
+
+                        <i class="fa-solid fa-users"></i>
+
+                        &nbsp; Squad Overview
+
+                    </h3>
+
+
+                    <a href="#">
+                        View Squad
+                    </a>
+
+                </div>
+
+
+                <!-- PLAYER 1 -->
+
+                <div class="player">
+
+                    <div class="player-avatar">
+                        AY
+                    </div>
+
+
+                    <div class="player-info">
+
+                        <strong>
+                            Abdallah Yunga
+                        </strong>
+
+                        <span>
+                            Setter
+                        </span>
+
+                    </div>
+
+
+                    <div class="player-number">
+                        #2
+                    </div>
+
+                </div>
+
+
+                <!-- PLAYER 2 -->
+
+                <div class="player">
+
+                    <div class="player-avatar">
+                        HE
+                    </div>
+
+
+                    <div class="player-info">
+
+                        <strong>
+                            Herman Edward
+                        </strong>
+
+                        <span>
+                            Outside Hitter
+                        </span>
+
+                    </div>
+
+
+                    <div class="player-number">
+                        #10
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 ACHIEVEMENTS
+            ================================================== -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h3>
+
+                        <i class="fa-solid fa-trophy"></i>
+
+                        &nbsp; Achievements
+
+                    </h3>
+
+
+                    <a href="#">
+                        View All
+                    </a>
+
+                </div>
+
+
+                <!-- ACHIEVEMENT 1 -->
+
+                <div class="achievement">
+
+                    <div class="trophy">
+
+                        <i class="fa-solid fa-trophy"></i>
+
+                    </div>
+
+
+                    <div class="achievement-info">
+
+                        <strong>
+                            National Volleyball Champions
+                        </strong>
+
+                        <span>
+                            2025 Season
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACHIEVEMENT 2 -->
+
+                <div class="achievement">
+
+                    <div class="trophy">
+
+                        <i class="fa-solid fa-award"></i>
+
+                    </div>
+
+
+                    <div class="achievement-info">
+
+                        <strong>
+                            Best Performing Club
+                        </strong>
+
+                        <span>
+                            2022 Season
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             QUICK ACTIONS
+        ====================================================== -->
+
+        <div class="card" style="margin-top:20px;">
+
+            <div class="card-header">
+
+                <h3>
+                    Quick Actions
+                </h3>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+
+                <!-- ADD PLAYER -->
+
+                <a href="#" class="action">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    <span>
+                        Add Player
+                    </span>
+
+                </a>
+
+
+                <!-- ADD MATCH -->
+
+                <a href="#" class="action">
+
+                    <i class="fa-solid fa-calendar-plus"></i>
+
+                    <span>
+                        Add Match
+                    </span>
+
+                </a>
+
+
+                <!-- ADD NEWS -->
+
+                <a href="#" class="action">
+
+                    <i class="fa-solid fa-newspaper"></i>
+
+                    <span>
+                        Add News
+                    </span>
+
+                </a>
+
+
+                <!-- UPLOAD PHOTO -->
+
+                <a href="#" class="action">
+
+                    <i class="fa-solid fa-image"></i>
+
+                    <span>
+                        Upload Photo
+                    </span>
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================= -->
+
+    <footer>
+
+        <p>
+
+            © 2026
+
+            <span>
+                Chaka to Chaka Volleyball Club
+            </span>.
+
+            All Rights Reserved.
+
+        </p>
+
+    </footer>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================= -->
+
+    <script>
+
+
+        /* =========================================================
+           MOBILE MENU
+        ========================================================= */
+
+        const menuBtn =
+            document.getElementById("menuBtn");
+
+        const sidebar =
+            document.getElementById("sidebar");
+
+        const overlay =
+            document.getElementById("overlay");
+
+
+        menuBtn.onclick = () => {
+
+            menuBtn.classList.toggle("active");
+
+            sidebar.classList.toggle("active");
+
+            overlay.classList.toggle("active");
+
+        };
+
+
+        overlay.onclick = () => {
+
+            menuBtn.classList.remove("active");
+
+            sidebar.classList.remove("active");
+
+            overlay.classList.remove("active");
+
+        };
+
+
+        /* =========================================================
+           PARTICLES
+        ========================================================= */
+
+        const canvas =
+            document.getElementById("particles");
+
+        const ctx =
+            canvas.getContext("2d");
+
+
+        function resizeCanvas() {
+
+            canvas.width =
+                window.innerWidth;
+
+            canvas.height =
+                window.innerHeight;
+
+        }
+
+
+        resizeCanvas();
+
+
+        window.addEventListener(
+            "resize",
+            resizeCanvas
+        );
+
+
+        let particlesArray = [];
+
+
+        for (let i = 0; i < 90; i++) {
+
+            particlesArray.push({
+
+                x:
+                    Math.random() *
+                    canvas.width,
+
+                y:
+                    Math.random() *
+                    canvas.height,
+
+                size:
+                    Math.random() * 2,
+
+                speedX:
+                    Math.random() * .4,
+
+                speedY:
+                    Math.random() * .4
+
+            });
+
+        }
+
+
+        function animateParticles() {
+
+            ctx.clearRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+
+            particlesArray.forEach(p => {
+
+                p.x += p.speedX;
+
+                p.y += p.speedY;
+
+
+                if (
+                    p.x >
+                    canvas.width
+                ) {
+
+                    p.x = 0;
+
+                }
+
+
+                if (
+                    p.y >
+                    canvas.height
+                ) {
+
+                    p.y = 0;
+
+                }
+
+
+                ctx.fillStyle =
+                    "#38bdf8";
+
+                ctx.globalAlpha =
+                    .45;
+
+
+                ctx.fillRect(
+                    p.x,
+                    p.y,
+                    p.size,
+                    p.size
+                );
+
+            });
+
+
+            ctx.globalAlpha = 1;
+
+
+            requestAnimationFrame(
+                animateParticles
+            );
+
+        }
+
+
+        animateParticles();
+
+    </script>
+
+</body>
+
+</html>

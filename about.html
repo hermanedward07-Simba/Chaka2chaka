@@ -1,0 +1,2254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chaka to Chaka | Squad</title>
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =====================================================
+           BODY
+        ===================================================== */
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #020617;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           PARTICLE BACKGROUND
+        ===================================================== */
+
+        #particles {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(0, 212, 255, 0.08),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 80% 70%,
+                    rgba(0, 212, 255, 0.05),
+                    transparent 30%
+                );
+
+            z-index: -1;
+            pointer-events: none;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 70px;
+
+            padding: 0 5%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: rgba(2, 6, 23, 0.92);
+            backdrop-filter: blur(12px);
+
+            border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+
+            z-index: 1000;
+        }
+
+
+        /* LOGO */
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-area img {
+            width: 42px;
+            height: 42px;
+
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .logo-area h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .logo-area span {
+            color: #00d4ff;
+        }
+
+
+        /* =====================================================
+           DESKTOP NAVIGATION
+        ===================================================== */
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            list-style: none;
+        }
+
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            padding: 9px 14px;
+
+            color: #cbd5e1;
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 500;
+
+            border-radius: 8px;
+
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #00d4ff;
+            background: rgba(0, 212, 255, 0.08);
+        }
+
+
+        /* =====================================================
+           MOBILE MENU BUTTON
+        ===================================================== */
+
+        .menu-btn {
+            display: none;
+
+            color: #00d4ff;
+            font-size: 23px;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           MOBILE SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -280px;
+
+            width: 260px;
+            height: 100vh;
+
+            padding: 80px 25px;
+
+            background: #020617;
+
+            border-left: 1px solid rgba(0, 212, 255, 0.2);
+
+            z-index: 2000;
+
+            transition: 0.35s ease;
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar a {
+            display: block;
+
+            padding: 14px 10px;
+            margin-bottom: 5px;
+
+            color: #cbd5e1;
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            color: #00d4ff;
+            background: rgba(0, 212, 255, 0.08);
+        }
+
+        .sidebar a i {
+            width: 22px;
+        }
+
+
+        /* CLOSE BUTTON */
+
+        .close-btn {
+            position: absolute;
+            top: 22px;
+            right: 22px;
+
+            color: #00d4ff;
+            font-size: 22px;
+
+            cursor: pointer;
+        }
+
+
+        /* OVERLAY */
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+
+            background: rgba(0, 0, 0, 0.6);
+
+            z-index: 1500;
+
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+
+        /* =====================================================
+           MAIN CONTENT
+        ===================================================== */
+
+        .main {
+            width: 92%;
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding-top: 105px;
+            padding-bottom: 50px;
+        }
+
+
+        /* =====================================================
+           PAGE HEADER
+        ===================================================== */
+
+        .page-header {
+            text-align: center;
+
+            margin-bottom: 28px;
+        }
+
+        .page-header h1 {
+            font-size: 30px;
+            font-weight: 600;
+
+            margin-bottom: 5px;
+        }
+
+        .page-header h1 span {
+            color: #00d4ff;
+        }
+
+        .page-header p {
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           PLAYERS GRID
+        ===================================================== */
+
+        .players-grid {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+
+        /* =====================================================
+           PLAYER CARD
+        ===================================================== */
+
+        .player-card {
+            display: flex;
+            align-items: center;
+
+            min-height: 165px;
+
+            padding: 10px;
+
+            background: rgba(15, 23, 42, 0.82);
+
+            border: 1px solid rgba(148, 163, 184, 0.12);
+
+            border-radius: 14px;
+
+            overflow: hidden;
+
+            transition: 0.3s ease;
+        }
+
+        .player-card:hover {
+            transform: translateY(-3px);
+
+            border-color: rgba(0, 212, 255, 0.35);
+
+            box-shadow:
+                0 8px 25px rgba(0, 212, 255, 0.08);
+        }
+
+
+        /* =====================================================
+           PLAYER IMAGE
+        ===================================================== */
+
+        .player-image {
+            position: relative;
+
+            width: 125px;
+            height: 145px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            border-radius: 11px;
+
+            background: #0b1220;
+
+            border: 1px solid rgba(0, 212, 255, 0.25);
+        }
+
+
+        /*
+           IMPORTANT:
+
+           contain makes the entire image visible.
+           This prevents heads/feet from being cropped.
+
+           If your photos have different dimensions,
+           they will still fit inside the same box.
+        */
+
+        .player-image img {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: contain;
+
+            padding: 2px;
+
+            background: #0b1220;
+        }
+
+
+        /* PLACEHOLDER */
+
+        .player-placeholder {
+            position: absolute;
+
+            inset: 0;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            color: #00d4ff;
+
+            font-size: 35px;
+
+            background: #0b1220;
+        }
+
+
+        /* Show placeholder only when image fails */
+
+        .player-image.image-error .player-placeholder {
+            display: flex;
+        }
+
+
+        /* =====================================================
+           PLAYER INFORMATION
+        ===================================================== */
+
+        .player-content {
+            flex: 1;
+
+            min-width: 0;
+
+            padding-left: 15px;
+        }
+
+
+        /* PLAYER NAME + JERSEY */
+
+        .player-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 8px;
+
+            margin-bottom: 2px;
+        }
+
+        .player-name {
+            font-size: 16px;
+            font-weight: 600;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .jersey {
+            flex-shrink: 0;
+
+            padding: 4px 7px;
+
+            color: #00d4ff;
+
+            font-size: 10px;
+
+            border: 1px solid rgba(0, 212, 255, 0.25);
+
+            border-radius: 6px;
+        }
+
+
+        /* POSITION */
+
+        .position {
+            color: #94a3b8;
+
+            font-size: 11px;
+
+            margin-bottom: 10px;
+        }
+
+
+        /* =====================================================
+           PLAYER DETAILS
+        ===================================================== */
+
+        .player-details {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 6px;
+        }
+
+        .detail-box {
+            padding: 7px 6px;
+
+            background: rgba(2, 6, 23, 0.65);
+
+            border: 1px solid rgba(148, 163, 184, 0.08);
+
+            border-radius: 7px;
+        }
+
+        .detail-box i {
+            color: #00d4ff;
+
+            font-size: 9px;
+
+            margin-right: 3px;
+        }
+
+        .detail-label {
+            display: block;
+
+            color: #64748b;
+
+            font-size: 8px;
+
+            margin-bottom: 2px;
+
+            text-transform: uppercase;
+        }
+
+        .detail-value {
+            display: block;
+
+            color: #e2e8f0;
+
+            font-size: 10px;
+            font-weight: 500;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+            text-align: center;
+
+            padding: 22px 10px;
+
+            margin-top: 35px;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .footer span {
+            color: #00d4ff;
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 950px) {
+
+            .players-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 700px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .main {
+                width: 94%;
+
+                padding-top: 95px;
+            }
+
+            .page-header h1 {
+                font-size: 25px;
+            }
+
+            .page-header p {
+                font-size: 12px;
+            }
+
+
+            /* PLAYER CARD */
+
+            .player-card {
+                min-height: 145px;
+
+                padding: 9px;
+            }
+
+
+            /* PLAYER IMAGE */
+
+            .player-image {
+                width: 100px;
+                height: 125px;
+            }
+
+            .player-content {
+                padding-left: 11px;
+            }
+
+            .player-name {
+                font-size: 14px;
+            }
+
+            .player-details {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+
+        /* =====================================================
+           SMALL MOBILE
+        ===================================================== */
+
+        @media (max-width: 450px) {
+
+            .navbar {
+                padding: 0 4%;
+            }
+
+            .logo-area h2 {
+                font-size: 15px;
+            }
+
+            .logo-area img {
+                width: 36px;
+                height: 36px;
+            }
+
+
+            .player-card {
+                min-height: 135px;
+
+                padding: 8px;
+            }
+
+
+            .player-image {
+                width: 82px;
+                height: 108px;
+            }
+
+
+            .player-content {
+                padding-left: 9px;
+            }
+
+
+            .player-name {
+                font-size: 13px;
+            }
+
+
+            .jersey {
+                font-size: 8px;
+
+                padding: 3px 5px;
+            }
+
+
+            .position {
+                font-size: 9px;
+
+                margin-bottom: 7px;
+            }
+
+
+            .player-details {
+                gap: 4px;
+            }
+
+
+            .detail-box {
+                padding: 5px 4px;
+            }
+
+
+            .detail-label {
+                font-size: 7px;
+            }
+
+
+            .detail-value {
+                font-size: 8px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         PARTICLE BACKGROUND
+    ====================================================== -->
+
+    <canvas id="particles"></canvas>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <nav class="navbar">
+
+        <div class="logo-area">
+
+            <img
+                src="images/chaka-to-chaka-logo.png"
+                alt="Chaka to Chaka Logo"
+                onerror="this.style.display='none'"
+            >
+
+            <h2>
+                Chaka <span>to</span> Chaka
+            </h2>
+
+        </div>
+
+
+        <!-- DESKTOP NAVIGATION -->
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="index.html">
+                    <i class="fa-solid fa-house"></i>
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="about.html" class="active">
+                    <i class="fa-solid fa-users"></i>
+                    Squad
+                </a>
+            </li>
+
+            <li>
+                <a href="Matches.html">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    Schedule
+                </a>
+            </li>
+
+            <li>
+                <a href="Gallery.html">
+                    <i class="fa-solid fa-images"></i>
+                    Gallery
+                </a>
+            </li>
+
+            <li>
+                <a href="Request.html">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Request
+                </a>
+            </li>
+
+        </ul>
+
+
+        <!-- MOBILE MENU -->
+
+        <div class="menu-btn" onclick="openMenu()">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================================
+         MOBILE SIDEBAR
+    ====================================================== -->
+
+    <div class="sidebar" id="sidebar">
+
+        <div class="close-btn" onclick="closeMenu()">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+
+
+        <a href="index.html">
+            <i class="fa-solid fa-house"></i>
+            Home
+        </a>
+
+        <a href="about.html" class="active">
+            <i class="fa-solid fa-users"></i>
+            Squad
+        </a>
+
+        <a href="Matches.html">
+            <i class="fa-solid fa-calendar-days"></i>
+            Schedule
+        </a>
+
+        <a href="Gallery.html">
+            <i class="fa-solid fa-images"></i>
+            Gallery
+        </a>
+
+        <a href="Request.html">
+            <i class="fa-solid fa-paper-plane"></i>
+            Request
+        </a>
+
+    </div>
+
+
+    <div
+        class="overlay"
+        id="overlay"
+        onclick="closeMenu()"
+    ></div>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main">
+
+
+        <!-- PAGE HEADER -->
+
+        <div class="page-header">
+
+            <h1>
+                Our <span>Squad</span>
+            </h1>
+
+            <p>
+                Meet the players representing Chaka to Chaka.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             PLAYERS
+        ================================================== -->
+
+        <div class="players-grid">
+
+
+            <!-- ================= PLAYER 01 ================= -->
+
+            <div class="player-card">
+
+                <div class="player-image">
+
+                    <img
+                        src="elisha.jpeg"
+                        alt="Elisha Nkwabi"
+                        onerror="
+                            this.style.display='none';
+                            this.parentElement.classList.add('image-error');
+                        "
+                    >
+
+                    <div class="player-placeholder">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="player-content">
+
+                    <div class="player-top">
+
+                        <div class="player-name">
+                            Elisha Nkwabi
+                        </div>
+
+                        <div class="jersey">
+                            #1
+                        </div>
+
+                    </div>
+
+
+                    <div class="position">
+                        Setter
+                    </div>
+
+
+                    <div class="player-details">
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Age
+                            </span>
+
+                            <span class="detail-value">
+                                <i class="fa-solid fa-cake-candles"></i>
+                                19
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Nationality
+                            </span>
+
+                            <span class="detail-value">
+                                Tanzania
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Height
+                            </span>
+
+                            <span class="detail-value">
+                                1.85 m
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Position
+                            </span>
+
+                            <span class="detail-value">
+                                Setter
+                            </span>
+
+                        </div>
+
+                        
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Matches
+                            </span>
+
+                            <span class="detail-value">
+                                3
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= PLAYER 02 ================= -->
+
+            <div class="player-card">
+
+                <div class="player-image">
+
+                    <img
+                        src="dula2.jpg"
+                        alt="Abdallah Yunga"
+                        onerror="
+                            this.style.display='none';
+                            this.parentElement.classList.add('image-error');
+                        "
+                    >
+
+                    <div class="player-placeholder">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="player-content">
+
+                    <div class="player-top">
+
+                        <div class="player-name">
+                            Abdallah Yunga
+                        </div>
+
+                        <div class="jersey">
+                            #2
+                        </div>
+
+                    </div>
+
+
+                    <div class="position">
+                        Setter
+                    </div>
+
+
+                    <div class="player-details">
+
+                        <div class="detail-box">
+                            <span class="detail-label">Age</span>
+                            <span class="detail-value">23</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Nationality</span>
+                            <span class="detail-value">Tanzania</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Height</span>
+                            <span class="detail-value">1.81 m</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Position</span>
+                            <span class="detail-value">Setter</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Matches</span>
+                            <span class="detail-value">4</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= PLAYER 03 ================= -->
+
+            <div class="player-card">
+
+                <div class="player-image">
+
+                    <img
+                        src="Frank.jpg"
+                        alt="Frank Joseph"
+                        onerror="
+                            this.style.display='none';
+                            this.parentElement.classList.add('image-error');
+                        "
+                    >
+
+                    <div class="player-placeholder">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="player-content">
+
+                    <div class="player-top">
+
+                        <div class="player-name">
+                            Frank Joseph
+                        </div>
+
+                        <div class="jersey">
+                            #03
+                        </div>
+
+                    </div>
+
+
+                    <div class="position">
+                        Setter
+                    </div>
+
+
+                    <div class="player-details">
+
+                        <div class="detail-box">
+                            <span class="detail-label">Age</span>
+                            <span class="detail-value">24</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Nationality</span>
+                            <span class="detail-value">Tanzania</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Height</span>
+                            <span class="detail-value">1.70 m</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Position</span>
+                            <span class="detail-value">Setter</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Matches</span>
+                            <span class="detail-value">5</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= PLAYER 04 ================= -->
+
+            <div class="player-card">
+
+                <div class="player-image">
+
+                    <img
+                        src="jimmy.jpg"
+                        alt="Jimmy James"
+                        onerror="
+                            this.style.display='none';
+                            this.parentElement.classList.add('image-error');
+                        "
+                    >
+
+                    <div class="player-placeholder">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="player-content">
+
+                    <div class="player-top">
+
+                        <div class="player-name">
+                            Jimmy James
+                        </div>
+
+                        <div class="jersey">
+                            #04
+                        </div>
+
+                    </div>
+
+
+                    <div class="position">
+                        Middle Blocker
+                    </div>
+
+
+                    <div class="player-details">
+
+                        <div class="detail-box">
+                            <span class="detail-label">Age</span>
+                            <span class="detail-value">23</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Nationality</span>
+                            <span class="detail-value">Tanzania</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Height</span>
+                            <span class="detail-value">1.94 m</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Position</span>
+                            <span class="detail-value">Middle Blocker</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Matches</span>
+                            <span class="detail-value">4</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= PLAYER 05 ================= -->
+
+            <div class="player-card">
+
+                <div class="player-image">
+
+                    <img
+                        src="George.jpg"
+                        alt="George Focus"
+                        onerror="
+                            this.style.display='none';
+                            this.parentElement.classList.add('image-error');
+                        "
+                    >
+
+                    <div class="player-placeholder">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="player-content">
+
+                    <div class="player-top">
+
+                        <div class="player-name">
+                            George Focus
+                        </div>
+
+                        <div class="jersey">
+                            #05
+                        </div>
+
+                    </div>
+
+
+                    <div class="position">
+                        Middle Blocker
+                    </div>
+
+
+                    <div class="player-details">
+
+                        <div class="detail-box">
+                            <span class="detail-label">Age</span>
+                            <span class="detail-value">23</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Nationality</span>
+                            <span class="detail-value">Tanzania</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Height</span>
+                            <span class="detail-value">1.96 m</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Position</span>
+                            <span class="detail-value">Middle Blocker</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Matches</span>
+                            <span class="detail-value">2</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+                        <!-- ================= PLAYER 06 ================= -->
+
+            <div class="player-card">
+
+                <div class="player-image">
+
+                    <img
+                        src="Simba.jpg"
+                        alt="Goodluck Manda"
+                        onerror="
+                            this.style.display='none';
+                            this.parentElement.classList.add('image-error');
+                        "
+                    >
+
+                    <div class="player-placeholder">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="player-content">
+
+                    <div class="player-top">
+
+                        <div class="player-name">
+                            Goodluck Manda
+                        </div>
+
+                        <div class="jersey">
+                            #06
+                        </div>
+
+                    </div>
+
+
+                    <div class="position">
+                        Middle Blocker
+                    </div>
+
+
+                    <div class="player-details">
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Age
+                            </span>
+
+                            <span class="detail-value">
+                                <i class="fa-solid fa-cake-candles"></i>
+                                23
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Nationality
+                            </span>
+
+                            <span class="detail-value">
+                                Tanzania
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Height
+                            </span>
+
+                            <span class="detail-value">
+                                1.89 m
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Position
+                            </span>
+
+                            <span class="detail-value">
+                                Middle Blocker
+                            </span>
+
+                        </div>
+
+                        
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Matches
+                            </span>
+
+                            <span class="detail-value">
+                                1
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ================= PLAYER 07 ================= -->
+
+            <div class="player-card">
+
+                <div class="player-image">
+
+                    <img
+                        src="sajigwa2.jpg"
+                        alt="Nsajigwa Harding"
+                        onerror="
+                            this.style.display='none';
+                            this.parentElement.classList.add('image-error');
+                        "
+                    >
+
+                    <div class="player-placeholder">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="player-content">
+
+                    <div class="player-top">
+
+                        <div class="player-name">
+                            Nsajigwa Harding
+                        </div>
+
+                        <div class="jersey">
+                            #07
+                        </div>
+
+                    </div>
+
+
+                    <div class="position">
+                        Opposite
+                    </div>
+
+
+                    <div class="player-details">
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Age
+                            </span>
+
+                            <span class="detail-value">
+                                <i class="fa-solid fa-cake-candles"></i>
+                                22
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Nationality
+                            </span>
+
+                            <span class="detail-value">
+                                Tanzania
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Height
+                            </span>
+
+                            <span class="detail-value">
+                                1.90 m
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Position
+                            </span>
+
+                            <span class="detail-value">
+                                Opposite
+                            </span>
+
+                        </div>
+
+                        
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Matches
+                            </span>
+
+                            <span class="detail-value">
+                                5
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ================= PLAYER 08 ================= -->
+
+            <div class="player-card">
+
+                <div class="player-image">
+
+                    <img
+                        src="shao.jpg"
+                        alt="Shabani Hatibu"
+                        onerror="
+                            this.style.display='none';
+                            this.parentElement.classList.add('image-error');
+                        "
+                    >
+
+                    <div class="player-placeholder">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="player-content">
+
+                    <div class="player-top">
+
+                        <div class="player-name">
+                           Shabani Hatibu
+                        </div>
+
+                        <div class="jersey">
+                            #08
+                        </div>
+
+                    </div>
+
+
+                    <div class="position">
+                        Opposite
+                    </div>
+
+
+                    <div class="player-details">
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Age
+                            </span>
+
+                            <span class="detail-value">
+                                <i class="fa-solid fa-cake-candles"></i>
+                                24
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Nationality
+                            </span>
+
+                            <span class="detail-value">
+                                Tanzania
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Height
+                            </span>
+
+                            <span class="detail-value">
+                                1.83 m
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Position
+                            </span>
+
+                            <span class="detail-value">
+                               Opposite
+                            </span>
+
+                        </div>
+
+                        
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Matches
+                            </span>
+
+                            <span class="detail-value">
+                                4
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ================= PLAYER 09 ================= -->
+
+            <div class="player-card">
+
+                <div class="player-image">
+
+                    <img
+                        src="jack2.jpg"
+                        alt="Jackson Ezekiel"
+                        onerror="
+                            this.style.display='none';
+                            this.parentElement.classList.add('image-error');
+                        "
+                    >
+
+                    <div class="player-placeholder">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="player-content">
+
+                    <div class="player-top">
+
+                        <div class="player-name">
+                            Jackson Ezekiel
+                        </div>
+
+                        <div class="jersey">
+                            #09
+                        </div>
+
+                    </div>
+
+
+                    <div class="position">
+                        Outside Hitter
+                    </div>
+
+
+                    <div class="player-details">
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Age
+                            </span>
+
+                            <span class="detail-value">
+                                <i class="fa-solid fa-cake-candles"></i>
+                                24
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Nationality
+                            </span>
+
+                            <span class="detail-value">
+                                Tanzania
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Height
+                            </span>
+
+                            <span class="detail-value">
+                                1.95 m
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Position
+                            </span>
+
+                            <span class="detail-value">
+                                Outside Hitter
+                            </span>
+
+                        </div>
+
+                        
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Matches
+                            </span>
+
+                            <span class="detail-value">
+                                2
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ================= PLAYER 01 ================= -->
+
+            <div class="player-card">
+
+                <div class="player-image">
+
+                    <img
+                        src="Simba.jpg"
+                        alt="Herman Edward"
+                        onerror="
+                            this.style.display='none';
+                            this.parentElement.classList.add('image-error');
+                        "
+                    >
+
+                    <div class="player-placeholder">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="player-content">
+
+                    <div class="player-top">
+
+                        <div class="player-name">
+                            Herman Edward
+                        </div>
+
+                        <div class="jersey">
+                            #10
+                        </div>
+
+                    </div>
+
+
+                    <div class="position">
+                        Outside Hitter
+                    </div>
+
+
+                    <div class="player-details">
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Age
+                            </span>
+
+                            <span class="detail-value">
+                                <i class="fa-solid fa-cake-candles"></i>
+                                23
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Nationality
+                            </span>
+
+                            <span class="detail-value">
+                                Tanzania
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Height
+                            </span>
+
+                            <span class="detail-value">
+                                1.95 m
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Position
+                            </span>
+
+                            <span class="detail-value">
+                                Outside Hitter
+                            </span>
+
+                        </div>
+
+                        
+
+                        <div class="detail-box">
+
+                            <span class="detail-label">
+                                Matches
+                            </span>
+
+                            <span class="detail-value">
+                                4
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ================= PLAYER 03 ================= -->
+
+            <div class="player-card">
+
+                <div class="player-image">
+
+                    <img
+                        src="mseti.jpg"
+                        alt="Mseth Faustine"
+                        onerror="
+                            this.style.display='none';
+                            this.parentElement.classList.add('image-error');
+                        "
+                    >
+
+                    <div class="player-placeholder">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="player-content">
+
+                    <div class="player-top">
+
+                        <div class="player-name">
+                            Mseth Faustine
+                        </div>
+
+                        <div class="jersey">
+                            #11
+                        </div>
+
+                    </div>
+
+
+                    <div class="position">
+                        Outside Hitter
+                    </div>
+
+
+                    <div class="player-details">
+
+                        <div class="detail-box">
+                            <span class="detail-label">Age</span>
+                            <span class="detail-value">25</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Nationality</span>
+                            <span class="detail-value">Tanzania</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Height</span>
+                            <span class="detail-value">1.87 m</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Position</span>
+                            <span class="detail-value">Outside Hitter</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Matches</span>
+                            <span class="detail-value">3</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ================= PLAYER 11 ================= -->
+
+            <div class="player-card">
+
+                <div class="player-image">
+
+                    <img
+                        src="janu.jpg"
+                        alt="January Damiano"
+                        onerror="
+                            this.style.display='none';
+                            this.parentElement.classList.add('image-error');
+                        "
+                    >
+
+                    <div class="player-placeholder">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="player-content">
+
+                    <div class="player-top">
+
+                        <div class="player-name">
+                            January Damiano
+                        </div>
+
+                        <div class="jersey">
+                            #12
+                        </div>
+
+                    </div>
+
+
+                    <div class="position">
+                        Libero
+                    </div>
+
+
+                    <div class="player-details">
+
+                        <div class="detail-box">
+                            <span class="detail-label">Age</span>
+                            <span class="detail-value">23</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Nationality</span>
+                            <span class="detail-value">Tanzania</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Height</span>
+                            <span class="detail-value">1.74 m</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Position</span>
+                            <span class="detail-value">Libero</span>
+                        </div>
+
+                        <div class="detail-box">
+                            <span class="detail-label">Matches</span>
+                            <span class="detail-value">0</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="footer">
+
+        © 2026
+        <span>Chaka to Chaka</span>.
+        All Rights Reserved.
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        /* =====================================================
+           MOBILE MENU
+        ===================================================== */
+
+        function openMenu() {
+
+            document
+                .getElementById("sidebar")
+                .classList.add("active");
+
+            document
+                .getElementById("overlay")
+                .classList.add("active");
+        }
+
+
+        function closeMenu() {
+
+            document
+                .getElementById("sidebar")
+                .classList.remove("active");
+
+            document
+                .getElementById("overlay")
+                .classList.remove("active");
+        }
+
+
+        /* =====================================================
+           PARTICLES
+        ===================================================== */
+
+        const canvas =
+            document.getElementById("particles");
+
+        const ctx =
+            canvas.getContext("2d");
+
+        let particles = [];
+
+
+        function resizeCanvas() {
+
+            canvas.width =
+                window.innerWidth;
+
+            canvas.height =
+                window.innerHeight;
+        }
+
+
+        window.addEventListener(
+            "resize",
+            resizeCanvas
+        );
+
+
+        resizeCanvas();
+
+
+        class Particle {
+
+            constructor() {
+
+                this.x =
+                    Math.random() * canvas.width;
+
+                this.y =
+                    Math.random() * canvas.height;
+
+                this.size =
+                    Math.random() * 1.5 + 0.5;
+
+                this.speedX =
+                    (Math.random() - 0.5) * 0.4;
+
+                this.speedY =
+                    (Math.random() - 0.5) * 0.4;
+            }
+
+
+            update() {
+
+                this.x += this.speedX;
+
+                this.y += this.speedY;
+
+
+                if (
+                    this.x < 0 ||
+                    this.x > canvas.width
+                ) {
+
+                    this.speedX *= -1;
+                }
+
+
+                if (
+                    this.y < 0 ||
+                    this.y > canvas.height
+                ) {
+
+                    this.speedY *= -1;
+                }
+            }
+
+
+            draw() {
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    this.x,
+                    this.y,
+                    this.size,
+                    0,
+                    Math.PI * 2
+                );
+
+                ctx.fillStyle =
+                    "rgba(0, 212, 255, 0.35)";
+
+                ctx.fill();
+            }
+        }
+
+
+        function createParticles() {
+
+            particles = [];
+
+
+            const amount =
+                Math.min(
+                    100,
+                    Math.floor(
+                        window.innerWidth / 12
+                    )
+                );
+
+
+            for (
+                let i = 0;
+                i < amount;
+                i++
+            ) {
+
+                particles.push(
+                    new Particle()
+                );
+            }
+        }
+
+
+        createParticles();
+
+
+        window.addEventListener(
+            "resize",
+            createParticles
+        );
+
+
+        function animateParticles() {
+
+            ctx.clearRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+
+            particles.forEach(
+                particle => {
+
+                    particle.update();
+                    particle.draw();
+
+                }
+            );
+
+
+            requestAnimationFrame(
+                animateParticles
+            );
+        }
+
+
+        animateParticles();
+
+    </script>
+
+</body>
+
+</html>

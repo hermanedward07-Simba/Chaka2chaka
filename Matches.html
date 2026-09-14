@@ -1,0 +1,2543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chaka to Chaka | Schedule</title>
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        /* =====================================================
+           BODY
+        ===================================================== */
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #020617;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           PARTICLES
+        ===================================================== */
+
+        #particles {
+            position: fixed;
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            z-index: -2;
+        }
+
+        body::before {
+            content: "";
+
+            position: fixed;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(0, 212, 255, 0.08),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 80% 70%,
+                    rgba(0, 212, 255, 0.05),
+                    transparent 30%
+                );
+
+            z-index: -1;
+            pointer-events: none;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+           SAME STYLE AS GALLERY PAGE
+        ===================================================== */
+
+        .navbar {
+            width: 100%;
+            height: 70px;
+
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            z-index: 1000;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            background: rgba(2, 6, 23, 0.92);
+
+            backdrop-filter: blur(12px);
+
+            border-bottom:
+                1px solid rgba(0, 212, 255, 0.15);
+        }
+
+
+        /* =====================================================
+           LOGO
+        ===================================================== */
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-area img {
+            width: 42px;
+            height: 42px;
+
+            object-fit: contain;
+
+            border-radius: 50%;
+        }
+
+        .logo-area h2 {
+            color: #ffffff;
+
+            font-size: 19px;
+            font-weight: 700;
+        }
+
+        .logo-area span {
+            color: #00d4ff;
+        }
+
+
+        /* =====================================================
+           DESKTOP NAVIGATION
+        ===================================================== */
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            list-style: none;
+        }
+
+        .nav-links a {
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            padding: 9px 14px;
+
+            color: #cbd5e1;
+
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 500;
+
+            border-radius: 8px;
+
+            transition: 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: "";
+
+            position: absolute;
+
+            left: 14px;
+            right: 14px;
+            bottom: 2px;
+
+            width: 0;
+            height: 2px;
+
+            background: #00d4ff;
+
+            box-shadow:
+                0 0 8px #00d4ff;
+
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #00d4ff;
+
+            background:
+                rgba(0, 212, 255, 0.08);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: calc(100% - 28px);
+        }
+
+
+        /* =====================================================
+           MOBILE MENU BUTTON
+        ===================================================== */
+
+        .menu-btn {
+            display: none;
+
+            color: #00d4ff;
+
+            font-size: 24px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .menu-btn:hover {
+            text-shadow:
+                0 0 10px #00d4ff;
+        }
+
+
+        /* =====================================================
+           MOBILE SIDEBAR
+           SAME STYLE AS GALLERY PAGE
+        ===================================================== */
+
+        .sidebar {
+            position: fixed;
+
+            top: 0;
+            right: -280px;
+
+            width: 270px;
+            height: 100vh;
+
+            z-index: 2000;
+
+            padding: 80px 30px;
+
+            background: #020617;
+
+            border-left:
+                1px solid rgba(0, 212, 255, 0.15);
+
+            transition: 0.35s ease;
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar a {
+            display: block;
+
+            padding: 14px 0;
+
+            margin-bottom: 2px;
+
+            color: #cbd5e1;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            border-bottom:
+                1px solid rgba(148, 163, 184, 0.08);
+
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            color: #00d4ff;
+        }
+
+        .sidebar a i {
+            width: 25px;
+
+            margin-right: 5px;
+        }
+
+
+        /* =====================================================
+           CLOSE BUTTON
+        ===================================================== */
+
+        .close-btn {
+            position: absolute;
+
+            top: 25px;
+            right: 25px;
+
+            color: #00d4ff;
+
+            font-size: 22px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .close-btn:hover {
+            transform: rotate(90deg);
+
+            text-shadow:
+                0 0 10px #00d4ff;
+        }
+
+
+        /* =====================================================
+           OVERLAY
+        ===================================================== */
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+
+            background:
+                rgba(0, 0, 0, 0.65);
+
+            z-index: 1500;
+
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .main {
+            width: 92%;
+            max-width: 1150px;
+
+            margin: auto;
+
+            padding-top: 105px;
+            padding-bottom: 50px;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .page-header {
+            text-align: center;
+
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            font-size: 30px;
+            font-weight: 600;
+
+            margin-bottom: 5px;
+        }
+
+        .page-header h1 span {
+            color: #00d4ff;
+        }
+
+        .page-header p {
+            color: #94a3b8;
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           MATCH FILTER BUTTONS
+        ===================================================== */
+
+        .match-tabs {
+            display: flex;
+            justify-content: center;
+
+            gap: 8px;
+
+            margin-bottom: 25px;
+
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            border:
+                1px solid rgba(148, 163, 184, 0.15);
+
+            background:
+                rgba(15, 23, 42, 0.75);
+
+            color: #94a3b8;
+
+            padding: 9px 18px;
+
+            border-radius: 8px;
+
+            font-family: inherit;
+
+            font-size: 12px;
+
+            cursor: pointer;
+
+            transition: 0.3s ease;
+        }
+
+        .tab-btn i {
+            margin-right: 5px;
+        }
+
+        .tab-btn:hover,
+        .tab-btn.active {
+            color: #00d4ff;
+
+            border-color:
+                rgba(0, 212, 255, 0.35);
+
+            background:
+                rgba(0, 212, 255, 0.08);
+        }
+
+
+        /* =====================================================
+           MATCH LIST
+        ===================================================== */
+
+        .matches-container {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 14px;
+        }
+
+
+        /* =====================================================
+           MATCH CARD
+        ===================================================== */
+
+        .match-card {
+            display: grid;
+
+            grid-template-columns:
+                115px 1fr 140px;
+
+            align-items: center;
+
+            gap: 20px;
+
+            padding: 16px 18px;
+
+            background:
+                rgba(15, 23, 42, 0.82);
+
+            border:
+                1px solid rgba(148, 163, 184, 0.12);
+
+            border-radius: 14px;
+
+            transition: 0.3s ease;
+        }
+
+        .match-card:hover {
+            transform: translateY(-2px);
+
+            border-color:
+                rgba(0, 212, 255, 0.35);
+
+            box-shadow:
+                0 8px 25px
+                rgba(0, 212, 255, 0.07);
+        }
+
+
+        /* =====================================================
+           MATCH DATE
+        ===================================================== */
+
+        .match-date {
+            text-align: center;
+
+            padding-right: 15px;
+
+            border-right:
+                1px solid rgba(148, 163, 184, 0.12);
+        }
+
+        .match-date .day {
+            color: #00d4ff;
+
+            font-size: 22px;
+            font-weight: 600;
+
+            line-height: 1;
+        }
+
+        .match-date .month {
+            color: #e2e8f0;
+
+            font-size: 11px;
+
+            margin-top: 3px;
+
+            text-transform: uppercase;
+        }
+
+        .match-date .year {
+            color: #64748b;
+
+            font-size: 9px;
+        }
+
+
+        /* =====================================================
+           MATCH DETAILS
+        ===================================================== */
+
+        .match-info {
+            min-width: 0;
+        }
+
+        .match-status {
+            display: inline-block;
+
+            padding: 4px 8px;
+
+            margin-bottom: 6px;
+
+            border-radius: 5px;
+
+            font-size: 8px;
+            font-weight: 600;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.4px;
+        }
+
+
+        /* UPCOMING */
+
+        .upcoming-status {
+            color: #00d4ff;
+
+            background:
+                rgba(0, 212, 255, 0.08);
+
+            border:
+                1px solid rgba(0, 212, 255, 0.2);
+        }
+
+
+        /* COMPLETED */
+
+        .completed-status {
+            color: #4ade80;
+
+            background:
+                rgba(74, 222, 128, 0.08);
+
+            border:
+                1px solid rgba(74, 222, 128, 0.2);
+        }
+
+
+        /* =====================================================
+           TEAMS
+        ===================================================== */
+
+        .teams {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .team {
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            min-width: 0;
+        }
+
+        .team img {
+            width: 32px;
+            height: 32px;
+
+            object-fit: contain;
+
+            flex-shrink: 0;
+        }
+
+        .team-name {
+            color: #f1f5f9;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+        .vs {
+            color: #64748b;
+
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           VENUE / TIME
+        ===================================================== */
+
+        .match-meta {
+            margin-top: 8px;
+
+            display: flex;
+
+            gap: 15px;
+
+            color: #64748b;
+
+            font-size: 9px;
+        }
+
+        .match-meta span {
+            display: flex;
+
+            align-items: center;
+
+            gap: 4px;
+        }
+
+        .match-meta i {
+            color: #00d4ff;
+        }
+
+
+        /* =====================================================
+           MATCH RESULT / TIME
+        ===================================================== */
+
+        .match-result {
+            text-align: right;
+        }
+
+        .match-time {
+            color: #00d4ff;
+
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .match-result-text {
+            color: #94a3b8;
+
+            font-size: 9px;
+
+            margin-top: 2px;
+        }
+
+
+        /* =====================================================
+           SCORE
+        ===================================================== */
+
+        .score {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: flex-end;
+
+            gap: 6px;
+        }
+
+        .score-number {
+            color: #ffffff;
+
+            font-size: 19px;
+            font-weight: 600;
+        }
+
+        .score-separator {
+            color: #64748b;
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           WIN
+        ===================================================== */
+
+        .win {
+            color: #4ade80;
+
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           LOSS
+        ===================================================== */
+
+        .loss {
+            color: #f87171;
+
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           NO MATCHES
+        ===================================================== */
+
+        .no-matches {
+            display: none;
+
+            text-align: center;
+
+            padding: 50px 20px;
+
+            color: #64748b;
+
+            background:
+                rgba(15, 23, 42, 0.6);
+
+            border:
+                1px solid rgba(148, 163, 184, 0.1);
+
+            border-radius: 14px;
+        }
+
+        .no-matches i {
+            display: block;
+
+            color: #00d4ff;
+
+            font-size: 30px;
+
+            margin-bottom: 10px;
+        }
+
+        .no-matches p {
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+            text-align: center;
+
+            padding: 22px 10px;
+
+            margin-top: 35px;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            border-top:
+                1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .footer span {
+            color: #00d4ff;
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 800px) {
+
+            .match-card {
+                grid-template-columns:
+                    90px 1fr 100px;
+
+                gap: 12px;
+
+                padding: 13px;
+            }
+
+            .team-name {
+                font-size: 11px;
+            }
+
+            .match-meta {
+                gap: 8px;
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 650px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .main {
+                width: 94%;
+
+                padding-top: 95px;
+            }
+
+            .page-header h1 {
+                font-size: 25px;
+            }
+
+            .page-header p {
+                font-size: 11px;
+            }
+
+
+            /* TABS */
+
+            .match-tabs {
+                gap: 6px;
+            }
+
+            .tab-btn {
+                padding: 8px 11px;
+
+                font-size: 10px;
+            }
+
+
+            /* MATCH CARD */
+
+            .match-card {
+                grid-template-columns:
+                    75px 1fr;
+
+                gap: 10px;
+
+                padding: 12px;
+            }
+
+
+            /* DATE */
+
+            .match-date {
+                border-right:
+                    1px solid
+                    rgba(148, 163, 184, 0.12);
+
+                padding-right: 10px;
+            }
+
+            .match-date .day {
+                font-size: 19px;
+            }
+
+
+            /* MATCH INFO */
+
+            .match-info {
+                min-width: 0;
+            }
+
+
+            /* RESULT */
+
+            .match-result {
+                grid-column: 2;
+
+                text-align: left;
+
+                padding-top: 7px;
+
+                border-top:
+                    1px solid
+                    rgba(148, 163, 184, 0.08);
+            }
+
+            .score {
+                justify-content: flex-start;
+            }
+
+
+            .match-meta {
+                flex-wrap: wrap;
+
+                gap: 5px 12px;
+            }
+        }
+
+
+        /* =====================================================
+           SMALL MOBILE
+        ===================================================== */
+
+        @media (max-width: 420px) {
+
+            .logo-area h2 {
+                font-size: 15px;
+            }
+
+            .logo-area img {
+                width: 36px;
+                height: 36px;
+            }
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+
+            .match-card {
+                grid-template-columns:
+                    65px 1fr;
+
+                padding: 10px;
+            }
+
+
+            .match-date .day {
+                font-size: 17px;
+            }
+
+            .match-date .month {
+                font-size: 9px;
+            }
+
+            .team img {
+                width: 27px;
+                height: 27px;
+            }
+
+            .team-name {
+                font-size: 10px;
+            }
+
+            .match-time {
+                font-size: 14px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         PARTICLE BACKGROUND
+    ====================================================== -->
+
+    <canvas id="particles"></canvas>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <nav class="navbar">
+
+
+        <!-- LOGO -->
+
+        <div class="logo-area">
+
+            <img
+                src="images/chaka-to-chaka-logo.png"
+                alt="Chaka to Chaka Logo"
+                onerror="this.style.display='none'"
+            >
+
+            <h2>
+                Chaka <span>to Chaka</span>
+            </h2>
+
+        </div>
+
+
+        <!-- =================================================
+             DESKTOP NAVIGATION
+        ================================================== -->
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="index.html">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Home
+
+                </a>
+            </li>
+
+
+            <li>
+                <a href="about.html">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    Squad
+
+                </a>
+            </li>
+
+
+            <li>
+                <a
+                    href="Matches.html"
+                    class="active"
+                >
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                    Schedule
+
+                </a>
+            </li>
+
+
+            <li>
+                <a href="Gallery.html">
+
+                    <i class="fa-solid fa-images"></i>
+
+                    Gallery
+
+                </a>
+            </li>
+
+
+            <li>
+                <a href="Request.html">
+
+                    <i class="fa-solid fa-paper-plane"></i>
+
+                    Request
+
+                </a>
+            </li>
+
+        </ul>
+
+
+        <!-- =================================================
+             MOBILE MENU BUTTON
+        ================================================== -->
+
+        <div
+            class="menu-btn"
+            onclick="openMenu()"
+        >
+
+            <i class="fa-solid fa-bars"></i>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================================
+         MOBILE SIDEBAR
+    ====================================================== -->
+
+    <div
+        class="sidebar"
+        id="sidebar"
+    >
+
+
+        <!-- CLOSE BUTTON -->
+
+        <div
+            class="close-btn"
+            onclick="closeMenu()"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </div>
+
+
+        <!-- MENU LINKS -->
+
+        <a href="index.html">
+
+            <i class="fa-solid fa-house"></i>
+
+            Home
+
+        </a>
+
+
+        <a href="about.html">
+
+            <i class="fa-solid fa-users"></i>
+
+            Squad
+
+        </a>
+
+
+        <a
+            href="Matches.html"
+            class="active"
+        >
+
+            <i class="fa-solid fa-calendar-days"></i>
+
+            Schedule
+
+        </a>
+
+
+        <a href="Gallery.html">
+
+            <i class="fa-solid fa-images"></i>
+
+            Gallery
+
+        </a>
+
+
+        <a href="Request.html">
+
+            <i class="fa-solid fa-paper-plane"></i>
+
+            Request
+
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         MOBILE OVERLAY
+    ====================================================== -->
+
+    <div
+        class="overlay"
+        id="overlay"
+        onclick="closeMenu()"
+    ></div>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main">
+
+
+        <!-- =================================================
+             PAGE HEADER
+        ================================================== -->
+
+        <div class="page-header">
+
+            <h1>
+                Match <span>Schedule</span>
+            </h1>
+
+            <p>
+                Follow Chaka to Chaka's fixtures and results.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             FILTER TABS
+        ================================================== -->
+
+        <div class="match-tabs">
+
+            <button
+                class="tab-btn active"
+                onclick="showMatches('upcoming', this)"
+            >
+
+                <i class="fa-solid fa-clock"></i>
+
+                Upcoming
+
+            </button>
+
+
+            <button
+                class="tab-btn"
+                onclick="showMatches('completed', this)"
+            >
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Completed
+
+            </button>
+
+
+            <button
+                class="tab-btn"
+                onclick="showMatches('all', this)"
+            >
+
+                <i class="fa-solid fa-list"></i>
+
+                All Matches
+
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             MATCHES
+        ================================================== -->
+
+        <div
+            class="matches-container"
+            id="matchesContainer"
+        >
+
+
+            <!-- =================================================
+                 UPCOMING MATCH 01
+            ================================================== -->
+
+            <div
+                class="match-card upcoming"
+                data-status="upcoming"
+            >
+
+                <div class="match-date">
+
+                    <div class="day">
+                        25
+                    </div>
+
+                    <div class="month">
+                        SEP
+                    </div>
+
+                    <div class="year">
+                        2026
+                    </div>
+
+                </div>
+
+
+                <div class="match-info">
+
+                    <span class="match-status upcoming-status">
+                        Upcoming
+                    </span>
+
+
+                    <div class="teams">
+
+                        <div class="team">
+
+                            <img
+                                src="Chaka tu chaka.png"
+                                alt="Chaka to Chaka"
+                            >
+
+                            <span class="team-name">
+                                Chaka to Chaka
+                            </span>
+
+                        </div>
+
+
+                        <span class="vs">
+                            VS
+                        </span>
+
+
+                        <div class="team">
+
+                            <img
+                                src="high.jpg"
+                                alt="Opponent"
+                            >
+
+                            <span class="team-name">
+                                High Voltage
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-meta">
+
+                        <span>
+
+                            <i class="fa-regular fa-clock"></i>
+
+                            16:00
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            Dar es Salaam, UDSM
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="match-result">
+
+                    <div class="match-time">
+                        16:00
+                    </div>
+
+                    <div class="match-result-text">
+                        Match Start
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 UPCOMING MATCH 02
+            ================================================== -->
+
+            <div
+                class="match-card upcoming"
+                data-status="upcoming"
+            >
+
+                <div class="match-date">
+
+                    <div class="day">
+                        29
+                    </div>
+
+                    <div class="month">
+                        SEP
+                    </div>
+
+                    <div class="year">
+                        2026
+                    </div>
+
+                </div>
+
+
+                <div class="match-info">
+
+                    <span class="match-status upcoming-status">
+                        Upcoming
+                    </span>
+
+
+                    <div class="teams">
+
+                        <div class="team">
+
+                            <img
+                                src="tpa.jpg"
+                                alt="TPA"
+                            >
+
+                            <span class="team-name">
+                                TPA
+                            </span>
+
+                        </div>
+
+
+                        <span class="vs">
+                            VS
+                        </span>
+
+
+                        <div class="team">
+
+                            <img
+                                src="Chaka tu chaka.png"
+                                alt="Chaka to Chaka"
+                            >
+
+                            <span class="team-name">
+                                Chaka to Chaka
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-meta">
+
+                        <span>
+
+                            <i class="fa-regular fa-clock"></i>
+
+                            16:00
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            TPA Stadium
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="match-result">
+
+                    <div class="match-time">
+                        16:00
+                    </div>
+
+                    <div class="match-result-text">
+                        Match Start
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 UPCOMING MATCH 03
+            ================================================== -->
+
+            <div
+                class="match-card upcoming"
+                data-status="upcoming"
+            >
+
+                <div class="match-date">
+
+                    <div class="day">
+                        29
+                    </div>
+
+                    <div class="month">
+                        SEP
+                    </div>
+
+                    <div class="year">
+                        2026
+                    </div>
+
+                </div>
+
+
+                <div class="match-info">
+
+                    <span class="match-status upcoming-status">
+                        Upcoming
+                    </span>
+
+
+                    <div class="teams">
+
+                        <div class="team">
+
+                            <img
+                                src="DIT.jpg"
+                                alt="DIT"
+                            >
+
+                            <span class="team-name">
+                                DIT
+                            </span>
+
+                        </div>
+
+
+                        <span class="vs">
+                            VS
+                        </span>
+
+
+                        <div class="team">
+
+                            <img
+                                src="Chaka tu chaka.png"
+                                alt="Chaka to Chaka"
+                            >
+
+                            <span class="team-name">
+                                Chaka to Chaka
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-meta">
+
+                        <span>
+
+                            <i class="fa-regular fa-clock"></i>
+
+                            16:00
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            DIT Stadium
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="match-result">
+
+                    <div class="match-time">
+                        16:00
+                    </div>
+
+                    <div class="match-result-text">
+                        Match Start
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 COMPLETED MATCH 01
+            ================================================== -->
+
+            <div
+                class="match-card completed"
+                data-status="completed"
+            >
+
+                <div class="match-date">
+
+                    <div class="day">
+                        16
+                    </div>
+
+                    <div class="month">
+                        AUG
+                    </div>
+
+                    <div class="year">
+                        2026
+                    </div>
+
+                </div>
+
+
+                <div class="match-info">
+
+                    <span class="match-status completed-status">
+                        Completed
+                    </span>
+
+
+                    <div class="teams">
+
+                        <div class="team">
+
+                            <img
+                                src="BVC.jpeg"
+                                alt="Bagamoyo VC"
+                            >
+
+                            <span class="team-name">
+                                Bagamoyo VC
+                            </span>
+
+                        </div>
+
+
+                        <span class="vs">
+                            VS
+                        </span>
+
+
+                        <div class="team">
+
+                            <img
+                                src="Chaka tu chaka.png"
+                                alt="Chaka to Chaka"
+                            >
+
+                            <span class="team-name">
+                                Chaka to Chaka
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-meta">
+
+                        <span>
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            Bagamoyo
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="match-result">
+
+                    <div class="score">
+
+                        <span class="score-number">
+                            0
+                        </span>
+
+                        <span class="score-separator">
+                            -
+                        </span>
+
+                        <span class="score-number">
+                            3
+                        </span>
+
+                    </div>
+
+                    <div class="win">
+                        WIN
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 COMPLETED MATCH 02
+            ================================================== -->
+
+            <div
+                class="match-card completed"
+                data-status="completed"
+            >
+
+                <div class="match-date">
+
+                    <div class="day">
+                        21
+                    </div>
+
+                    <div class="month">
+                        AUG
+                    </div>
+
+                    <div class="year">
+                        2026
+                    </div>
+
+                </div>
+
+
+                <div class="match-info">
+
+                    <span class="match-status completed-status">
+                        Completed
+                    </span>
+
+
+                    <div class="teams">
+
+                        <div class="team">
+
+                            <img
+                                src="ist.jpg"
+                                alt="IST"
+                            >
+
+                            <span class="team-name">
+                                IST
+                            </span>
+
+                        </div>
+
+
+                        <span class="vs">
+                            VS
+                        </span>
+
+
+                        <div class="team">
+
+                            <img
+                                src="Chaka tu chaka.png"
+                                alt="Chaka to Chaka"
+                            >
+
+                            <span class="team-name">
+                                Chaka to Chaka
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-meta">
+
+                        <span>
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            IST, Masaki
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="match-result">
+
+                    <div class="score">
+
+                        <span class="score-number">
+                            1
+                        </span>
+
+                        <span class="score-separator">
+                            -
+                        </span>
+
+                        <span class="score-number">
+                            3
+                        </span>
+
+                    </div>
+
+                    <div class="win">
+                        WIN
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 COMPLETED MATCH 03
+            ================================================== -->
+
+            <div
+                class="match-card completed"
+                data-status="completed"
+            >
+
+                <div class="match-date">
+
+                    <div class="day">
+                        28
+                    </div>
+
+                    <div class="month">
+                        AUG
+                    </div>
+
+                    <div class="year">
+                        2026
+                    </div>
+
+                </div>
+
+
+                <div class="match-info">
+
+                    <span class="match-status completed-status">
+                        Completed
+                    </span>
+
+
+                    <div class="teams">
+
+                        <div class="team">
+
+                            <img
+                                src="Tbs.jpg"
+                                alt="TBSVC"
+                            >
+
+                            <span class="team-name">
+                                TBS VC
+                            </span>
+
+                        </div>
+
+
+                        <span class="vs">
+                            VS
+                        </span>
+
+
+                        <div class="team">
+
+                            <img
+                                src="Chaka tu chaka.png"
+                                alt="Chaka to Chaka"
+                            >
+
+                            <span class="team-name">
+                                Chaka to Chaka
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-meta">
+
+                        <span>
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            TBS, Ubungo
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="match-result">
+
+                    <div class="score">
+
+                        <span class="score-number">
+                            1
+                        </span>
+
+                        <span class="score-separator">
+                            -
+                        </span>
+
+                        <span class="score-number">
+                            3
+                        </span>
+
+                    </div>
+
+                    <div class="win">
+                        WIN
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 COMPLETED MATCH 04
+            ================================================== -->
+
+            <div
+                class="match-card completed"
+                data-status="completed"
+            >
+
+                <div class="match-date">
+
+                    <div class="day">
+                        30
+                    </div>
+
+                    <div class="month">
+                        AUG
+                    </div>
+
+                    <div class="year">
+                        2026
+                    </div>
+
+                </div>
+
+
+                <div class="match-info">
+
+                    <span class="match-status completed-status">
+                        Completed
+                    </span>
+
+
+                    <div class="teams">
+
+                        <div class="team">
+
+                            <img
+                                src="duce.png"
+                                alt="DUCE"
+                            >
+
+                            <span class="team-name">
+                                DUCE
+                            </span>
+
+                        </div>
+
+
+                        <span class="vs">
+                            VS
+                        </span>
+
+
+                        <div class="team">
+
+                            <img
+                                src="Chaka tu chaka.png"
+                                alt="Chaka to Chaka"
+                            >
+
+                            <span class="team-name">
+                                Chaka to Chaka
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-meta">
+
+                        <span>
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            Duce, Dar es Salaam
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="match-result">
+
+                    <div class="score">
+
+                        <span class="score-number">
+                            1
+                        </span>
+
+                        <span class="score-separator">
+                            -
+                        </span>
+
+                        <span class="score-number">
+                            3
+                        </span>
+
+                    </div>
+
+                    <div class="win">
+                        WIN
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 COMPLETED MATCH 05
+            ================================================== -->
+
+            <div
+                class="match-card completed"
+                data-status="completed"
+            >
+
+                <div class="match-date">
+
+                    <div class="day">
+                        11
+                    </div>
+
+                    <div class="month">
+                        SEP
+                    </div>
+
+                    <div class="year">
+                        2026
+                    </div>
+
+                </div>
+
+
+                <div class="match-info">
+
+                    <span class="match-status completed-status">
+                        Completed
+                    </span>
+
+
+                    <div class="teams">
+
+                        <div class="team">
+
+                            <img
+                                src="ist.jpg"
+                                alt="IST"
+                            >
+
+                            <span class="team-name">
+                                IST
+                            </span>
+
+                        </div>
+
+
+                        <span class="vs">
+                            VS
+                        </span>
+
+
+                        <div class="team">
+
+                            <img
+                                src="Chaka tu chaka.png"
+                                alt="Chaka to Chaka"
+                            >
+
+                            <span class="team-name">
+                                Chaka to Chaka
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-meta">
+
+                        <span>
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            IST, Maskai
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="match-result">
+
+                    <div class="score">
+
+                        <span class="score-number">
+                            3
+                        </span>
+
+                        <span class="score-separator">
+                            -
+                        </span>
+
+                        <span class="score-number">
+                            2
+                        </span>
+
+                    </div>
+
+                    <div class="loss">
+                        LOSS
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             NO MATCHES MESSAGE
+        ================================================== -->
+
+        <div
+            class="no-matches"
+            id="noMatches"
+        >
+
+            <i class="fa-solid fa-calendar-xmark"></i>
+
+            <p>
+                No matches found in this category.
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="footer">
+
+        © 2026
+        <span>Chaka to Chaka</span>.
+        All Rights Reserved.
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+
+        /* =====================================================
+           MOBILE MENU
+        ===================================================== */
+
+        function openMenu() {
+
+            document
+                .getElementById("sidebar")
+                .classList.add("active");
+
+            document
+                .getElementById("overlay")
+                .classList.add("active");
+
+            document.body.style.overflow = "hidden";
+        }
+
+
+        function closeMenu() {
+
+            document
+                .getElementById("sidebar")
+                .classList.remove("active");
+
+            document
+                .getElementById("overlay")
+                .classList.remove("active");
+
+            document.body.style.overflow = "auto";
+        }
+
+
+        /* =====================================================
+           CLOSE MENU WHEN A LINK IS CLICKED
+        ===================================================== */
+
+        document
+            .querySelectorAll(".sidebar a")
+            .forEach(link => {
+
+                link.addEventListener(
+                    "click",
+                    closeMenu
+                );
+
+            });
+
+
+        /* =====================================================
+           MATCH FILTER
+        ===================================================== */
+
+        function showMatches(type, button) {
+
+            const matches =
+                document.querySelectorAll(
+                    ".match-card"
+                );
+
+            const noMatches =
+                document.getElementById(
+                    "noMatches"
+                );
+
+
+            /* Remove active from all buttons */
+
+            document
+                .querySelectorAll(".tab-btn")
+                .forEach(btn => {
+
+                    btn.classList.remove("active");
+
+                });
+
+
+            /* Activate clicked button */
+
+            button.classList.add("active");
+
+
+            let visibleMatches = 0;
+
+
+            matches.forEach(match => {
+
+                const status =
+                    match.getAttribute(
+                        "data-status"
+                    );
+
+
+                if (
+                    type === "all" ||
+                    status === type
+                ) {
+
+                    match.style.display = "grid";
+
+                    visibleMatches++;
+
+                } else {
+
+                    match.style.display = "none";
+
+                }
+
+            });
+
+
+            /* Show empty message */
+
+            if (visibleMatches === 0) {
+
+                noMatches.style.display = "block";
+
+            } else {
+
+                noMatches.style.display = "none";
+
+            }
+
+        }
+
+
+        /* =====================================================
+           PARTICLES
+        ===================================================== */
+
+        const canvas =
+            document.getElementById(
+                "particles"
+            );
+
+        const ctx =
+            canvas.getContext("2d");
+
+        let particles = [];
+
+
+        function resizeCanvas() {
+
+            canvas.width =
+                window.innerWidth;
+
+            canvas.height =
+                window.innerHeight;
+
+        }
+
+
+        window.addEventListener(
+            "resize",
+            resizeCanvas
+        );
+
+
+        resizeCanvas();
+
+
+        class Particle {
+
+            constructor() {
+
+                this.x =
+                    Math.random() *
+                    canvas.width;
+
+                this.y =
+                    Math.random() *
+                    canvas.height;
+
+                this.size =
+                    Math.random() * 1.5 + 0.5;
+
+                this.speedX =
+                    (Math.random() - 0.5) * 0.4;
+
+                this.speedY =
+                    (Math.random() - 0.5) * 0.4;
+
+            }
+
+
+            update() {
+
+                this.x += this.speedX;
+
+                this.y += this.speedY;
+
+
+                if (
+                    this.x < 0 ||
+                    this.x > canvas.width
+                ) {
+
+                    this.speedX *= -1;
+
+                }
+
+
+                if (
+                    this.y < 0 ||
+                    this.y > canvas.height
+                ) {
+
+                    this.speedY *= -1;
+
+                }
+
+            }
+
+
+            draw() {
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    this.x,
+                    this.y,
+                    this.size,
+                    0,
+                    Math.PI * 2
+                );
+
+                ctx.fillStyle =
+                    "rgba(0, 212, 255, 0.35)";
+
+                ctx.fill();
+
+            }
+
+        }
+
+
+        function createParticles() {
+
+            particles = [];
+
+
+            const amount =
+                Math.min(
+                    100,
+                    Math.floor(
+                        window.innerWidth / 12
+                    )
+                );
+
+
+            for (
+                let i = 0;
+                i < amount;
+                i++
+            ) {
+
+                particles.push(
+                    new Particle()
+                );
+
+            }
+
+        }
+
+
+        createParticles();
+
+
+        window.addEventListener(
+            "resize",
+            createParticles
+        );
+
+
+        function animateParticles() {
+
+            ctx.clearRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+
+            particles.forEach(
+                particle => {
+
+                    particle.update();
+
+                    particle.draw();
+
+                }
+            );
+
+
+            requestAnimationFrame(
+                animateParticles
+            );
+
+        }
+
+
+        animateParticles();
+
+
+        /* =====================================================
+           SHOW UPCOMING BY DEFAULT
+        ===================================================== */
+
+        window.addEventListener(
+            "DOMContentLoaded",
+            () => {
+
+                const firstButton =
+                    document.querySelector(
+                        ".tab-btn"
+                    );
+
+                showMatches(
+                    "upcoming",
+                    firstButton
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           ESC KEY CLOSES SIDEBAR
+        ===================================================== */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Escape") {
+
+                    closeMenu();
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

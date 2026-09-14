@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Request a Match | Chaka to Chaka</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#020617;
+    color:#fff;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+/* ================= PARTICLE BACKGROUND ================= */
+
+#particles{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-2;
+}
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(2,6,23,.45);
+    z-index:-1;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    height:70px;
+    width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:1000;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 6%;
+
+    background:rgba(2,6,23,.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(0,212,255,.18);
+}
+
+/* Logo */
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    color:#fff;
+    text-decoration:none;
+    font-size:19px;
+    font-weight:700;
+}
+
+.logo img{
+    width:42px;
+    height:42px;
+    object-fit:contain;
+}
+
+.logo span{
+    color:#00d4ff;
+}
+
+/* Navigation */
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:28px;
+}
+
+.nav-links a{
+    position:relative;
+
+    color:#dbeafe;
+    text-decoration:none;
+
+    font-size:14px;
+    font-weight:500;
+
+    transition:.3s;
+}
+
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-7px;
+
+    width:0;
+    height:2px;
+
+    background:#00d4ff;
+
+    box-shadow:0 0 8px #00d4ff;
+
+    transition:.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+    color:#00d4ff;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after{
+    width:100%;
+}
+
+/* Hamburger */
+
+.menu-btn{
+    display:none;
+    font-size:24px;
+    color:#00d4ff;
+    cursor:pointer;
+}
+
+/* ================= PAGE ================= */
+
+.page{
+    min-height:100vh;
+    padding:110px 6% 60px;
+}
+
+/* Header */
+
+.page-header{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.page-header h1{
+    font-size:42px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.page-header h1 span{
+    color:#00d4ff;
+    text-shadow:0 0 15px rgba(0,212,255,.45);
+}
+
+.page-header p{
+    color:#94a3b8;
+    max-width:650px;
+    margin:auto;
+    line-height:1.7;
+    font-size:14px;
+}
+
+/* ================= MAIN CONTENT ================= */
+
+.request-container{
+    width:100%;
+    max-width:1050px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap:25px;
+}
+
+/* ================= INFO CARD ================= */
+
+.info-card{
+    background:rgba(15,23,42,.82);
+    border:1px solid rgba(0,212,255,.16);
+
+    border-radius:18px;
+    padding:28px;
+
+    box-shadow:0 0 30px rgba(0,212,255,.05);
+
+    height:max-content;
+}
+
+.info-card h2{
+    color:#00d4ff;
+    font-size:22px;
+    margin-bottom:12px;
+}
+
+.info-card > p{
+    color:#94a3b8;
+    font-size:13px;
+    line-height:1.7;
+    margin-bottom:25px;
+}
+
+/* Info items */
+
+.info-item{
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    padding:14px 0;
+
+    border-bottom:1px solid rgba(148,163,184,.1);
+}
+
+.info-item:last-child{
+    border-bottom:none;
+}
+
+.info-icon{
+    width:42px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:10px;
+
+    color:#00d4ff;
+
+    background:rgba(0,212,255,.08);
+    border:1px solid rgba(0,212,255,.15);
+
+    box-shadow:0 0 12px rgba(0,212,255,.08);
+}
+
+.info-text h4{
+    font-size:13px;
+    margin-bottom:3px;
+}
+
+.info-text p{
+    color:#94a3b8;
+    font-size:12px;
+}
+
+/* ================= SOCIAL ICONS ================= */
+
+.social-title{
+    margin-top:25px;
+    margin-bottom:12px;
+
+    font-size:13px;
+    color:#cbd5e1;
+}
+
+.social-icons{
+    display:flex;
+    gap:14px;
+}
+
+.social-icons a{
+    width:45px;
+    height:45px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    text-decoration:none;
+
+    color:#fff;
+    font-size:19px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    transition:.35s;
+}
+
+/* WhatsApp */
+
+.social-icons .whatsapp{
+    background:rgba(37,211,102,.08);
+    color:#25D366;
+}
+
+.social-icons .whatsapp:hover{
+    transform:translateY(-5px) scale(1.05);
+
+    background:#25D366;
+    color:#fff;
+
+    box-shadow:
+        0 0 10px #25D366,
+        0 0 25px #25D366,
+        0 0 45px rgba(37,211,102,.7);
+}
+
+/* Instagram */
+
+.social-icons .instagram{
+    background:rgba(225,48,108,.08);
+    color:#ff4f9a;
+}
+
+.social-icons .instagram:hover{
+    transform:translateY(-5px) scale(1.05);
+
+    background:#e1306c;
+    color:#fff;
+
+    box-shadow:
+        0 0 10px #e1306c,
+        0 0 25px #e1306c,
+        0 0 45px rgba(225,48,108,.7);
+}
+
+/* ================= FORM CARD ================= */
+
+.form-card{
+    background:rgba(15,23,42,.88);
+
+    border:1px solid rgba(0,212,255,.18);
+
+    border-radius:18px;
+
+    padding:30px;
+
+    box-shadow:0 0 35px rgba(0,212,255,.06);
+}
+
+.form-card h2{
+    font-size:22px;
+    margin-bottom:6px;
+}
+
+.form-card .subtitle{
+    color:#94a3b8;
+    font-size:12px;
+    margin-bottom:25px;
+}
+
+/* Form grid */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:17px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.form-group.full{
+    grid-column:1 / -1;
+}
+
+.form-group label{
+    font-size:12px;
+    color:#cbd5e1;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+
+    padding:12px 13px;
+
+    border-radius:9px;
+
+    border:1px solid rgba(148,163,184,.15);
+
+    outline:none;
+
+    background:#020617;
+    color:#fff;
+
+    font-family:'Poppins',sans-serif;
+    font-size:12px;
+
+    transition:.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:#00d4ff;
+
+    box-shadow:
+        0 0 0 2px rgba(0,212,255,.08),
+        0 0 12px rgba(0,212,255,.08);
+}
+
+.form-group textarea{
+    resize:vertical;
+    min-height:100px;
+}
+
+.form-group select option{
+    background:#020617;
+    color:#fff;
+}
+
+/* ================= SUBMIT BUTTON ================= */
+
+.submit-btn{
+    width:100%;
+    margin-top:20px;
+
+    padding:13px 20px;
+
+    border:none;
+    border-radius:9px;
+
+    background:#00d4ff;
+    color:#020617;
+
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:13px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    box-shadow:0 0 15px rgba(0,212,255,.2);
+}
+
+.submit-btn:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 0 12px #00d4ff,
+        0 0 25px rgba(0,212,255,.5);
+}
+
+/* ================= NOTICE ================= */
+
+.notice{
+    margin-top:16px;
+
+    display:flex;
+    gap:9px;
+
+    padding:12px;
+
+    border-radius:8px;
+
+    background:rgba(0,212,255,.05);
+    border:1px solid rgba(0,212,255,.1);
+
+    color:#94a3b8;
+
+    font-size:10px;
+    line-height:1.6;
+}
+
+.notice i{
+    color:#00d4ff;
+    margin-top:2px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    text-align:center;
+
+    padding:25px 6%;
+
+    border-top:1px solid rgba(0,212,255,.1);
+
+    color:#64748b;
+
+    font-size:11px;
+}
+
+footer span{
+    color:#00d4ff;
+}
+
+/* ================= MOBILE SIDEBAR ================= */
+
+.sidebar{
+    position:fixed;
+    top:0;
+    right:-280px;
+
+    width:270px;
+    height:100vh;
+
+    background:#020617;
+
+    z-index:2000;
+
+    padding:80px 30px;
+
+    border-left:1px solid rgba(0,212,255,.15);
+
+    transition:.35s;
+}
+
+.sidebar.active{
+    right:0;
+}
+
+.sidebar a{
+    display:block;
+
+    padding:14px 0;
+
+    color:#cbd5e1;
+    text-decoration:none;
+
+    border-bottom:1px solid rgba(148,163,184,.08);
+
+    font-size:14px;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+    color:#00d4ff;
+}
+
+.close-btn{
+    position:absolute;
+    top:25px;
+    right:25px;
+
+    color:#00d4ff;
+    font-size:22px;
+
+    cursor:pointer;
+}
+
+.mobile-overlay{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.6);
+
+    z-index:1500;
+
+    display:none;
+}
+
+.mobile-overlay.active{
+    display:block;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:850px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .request-container{
+        grid-template-columns:1fr;
+        max-width:650px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .page{
+        padding:100px 5% 40px;
+    }
+
+    .page-header h1{
+        font-size:30px;
+    }
+
+    .page-header p{
+        font-size:12px;
+    }
+
+    .form-card,
+    .info-card{
+        padding:22px;
+        border-radius:14px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .logo{
+        font-size:16px;
+    }
+
+    .logo img{
+        width:36px;
+        height:36px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Particle Background -->
+<canvas id="particles"></canvas>
+<div class="overlay"></div>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <a href="index.html" class="logo">
+        <img src="Chaka tu chaka.png" alt="Chaka to Chaka Logo">
+        Chaka <span>to Chaka</span>
+    </a>
+
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">Squad</a>
+        <a href="Matches.html">Schedule</a>
+        <a href="Gallery.html">Gallery</a>
+        <a href="Request.html" class="active">Request</a>
+    </nav>
+
+    <div class="menu-btn" onclick="openSidebar()">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
+</header>
+
+
+<!-- ================= MOBILE SIDEBAR ================= -->
+
+<div class="mobile-overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<div class="sidebar" id="sidebar">
+
+    <div class="close-btn" onclick="closeSidebar()">
+        <i class="fa-solid fa-xmark"></i>
+    </div>
+
+    <a href="index.html">Home</a>
+    <a href="about.html">Squad</a>
+    <a href="Matches.html">Schedule</a>
+    <a href="Gallery.html">Gallery</a>
+    <a href="Request.html" class="active">Request a Match</a>
+
+</div>
+
+
+<!-- ================= PAGE ================= -->
+
+<main class="page">
+
+    <section class="page-header">
+
+        <h1>
+            Request a <span>Match</span>
+        </h1>
+
+        <p>
+            Is your team ready for a volleyball challenge?
+            Send Chaka to Chaka a match request and let's get on the court.
+        </p>
+
+    </section>
+
+
+    <!-- ================= CONTENT ================= -->
+
+    <div class="request-container">
+
+
+        <!-- ================= INFO ================= -->
+
+        <div class="info-card">
+
+            <h2>Let's Play Volleyball</h2>
+
+            <p>
+                Other volleyball teams can use this page to request
+                friendly matches, competitive games, tournaments,
+                or training matches with Chaka to Chaka.
+            </p>
+
+
+            <div class="info-item">
+
+                <div class="info-icon">
+                    <i class="fa-solid fa-volleyball"></i>
+                </div>
+
+                <div class="info-text">
+                    <h4>Match Type</h4>
+                    <p>Friendly, Competitive or Tournament</p>
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-icon">
+                    <i class="fa-regular fa-calendar"></i>
+                </div>
+
+                <div class="info-text">
+                    <h4>Choose Your Date</h4>
+                    <p>Suggest a suitable match date</p>
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+
+                <div class="info-text">
+                    <h4>Venue</h4>
+                    <p>Suggest your preferred location</p>
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-icon">
+                    <i class="fa-solid fa-phone"></i>
+                </div>
+
+                <div class="info-text">
+                    <h4>Get Confirmation</h4>
+                    <p>Our team will contact you</p>
+                </div>
+
+            </div>
+
+
+            <!-- Social -->
+
+            <div class="social-title">
+                Follow & Contact Chaka to Chaka
+            </div>
+
+            <div class="social-icons">
+
+                <!-- Replace number with actual WhatsApp number -->
+                <a
+                    href="https://wa.me/255754657240"
+                    target="_blank"
+                    class="whatsapp"
+                    title="WhatsApp"
+                >
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+
+
+                <!-- Replace with actual Instagram username -->
+                <a
+                    href="https://www.instagram.com/chaka_to_chaka_volleyball/"
+                    target="_blank"
+                    class="instagram"
+                    title="Instagram"
+                >
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= FORM ================= -->
+
+        <div class="form-card">
+
+            <h2>Match Request Form</h2>
+
+            <p class="subtitle">
+                Fill in the details below to request a match.
+            </p>
+
+
+            <form id="matchRequestForm">
+
+                <div class="form-grid">
+
+
+                    <!-- Team Name -->
+
+                    <div class="form-group">
+
+                        <label for="teamName">
+                            Team Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="teamName"
+                            placeholder="Enter your team name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Contact Person -->
+
+                    <div class="form-group">
+
+                        <label for="contact">
+                            Contact Person
+                        </label>
+
+                        <input
+                            type="text"
+                            id="contact"
+                            placeholder="Name of contact person"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Phone -->
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone / WhatsApp
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="+255..."
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="team@example.com"
+                        >
+
+                    </div>
+
+
+                    <!-- Date -->
+
+                    <div class="form-group">
+
+                        <label for="date">
+                            Preferred Match Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="date"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Time -->
+
+                    <div class="form-group">
+
+                        <label for="time">
+                            Preferred Time
+                        </label>
+
+                        <input
+                            type="time"
+                            id="time"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Venue -->
+
+                    <div class="form-group">
+
+                        <label for="venue">
+                            Preferred Venue
+                        </label>
+
+                        <input
+                            type="text"
+                            id="venue"
+                            placeholder="e.g. Indoor Sports Hall"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Match Type -->
+
+                    <div class="form-group">
+
+                        <label for="matchType">
+                            Match Type
+                        </label>
+
+                        <select id="matchType" required>
+
+                            <option value="">
+                                Select match type
+                            </option>
+
+                            <option value="Friendly">
+                                Friendly Match
+                            </option>
+
+                            <option value="Competitive">
+                                Competitive Match
+                            </option>
+
+                            <option value="Tournament">
+                                Tournament
+                            </option>
+
+                            <option value="Training">
+                                Training Match
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Message -->
+
+                    <div class="form-group full">
+
+                        <label for="message">
+                            Additional Message
+                        </label>
+
+                        <textarea
+                            id="message"
+                            placeholder="Tell us anything important about the match..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                >
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Send Match Request
+                </button>
+
+
+                <div class="notice">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                    <span>
+                        Sending this form does not automatically confirm
+                        the match. Chaka to Chaka will review your request
+                        and contact your team for confirmation.
+                    </span>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    © 2026 <span>Chaka to Chaka</span>.
+    All Rights Reserved.
+
+</footer>
+
+
+<script>
+
+/* ================= SIDEBAR ================= */
+
+function openSidebar(){
+
+    document.getElementById("sidebar")
+        .classList.add("active");
+
+    document.getElementById("overlay")
+        .classList.add("active");
+
+}
+
+function closeSidebar(){
+
+    document.getElementById("sidebar")
+        .classList.remove("active");
+
+    document.getElementById("overlay")
+        .classList.remove("active");
+
+}
+
+
+/* ================= FORM ================= */
+
+document
+.getElementById("matchRequestForm")
+.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    // Your WhatsApp number
+    const whatsappNumber = "255754657240";
+
+    // Get form values
+    const teamName =
+        document.getElementById("teamName").value;
+
+    const contact =
+        document.getElementById("contact").value;
+
+    const phone =
+        document.getElementById("phone").value;
+
+    const email =
+        document.getElementById("email").value;
+
+    const date =
+        document.getElementById("date").value;
+
+    const time =
+        document.getElementById("time").value;
+
+    const venue =
+        document.getElementById("venue").value;
+
+    const matchType =
+        document.getElementById("matchType").value;
+
+    const message =
+        document.getElementById("message").value;
+
+
+    // Create WhatsApp message
+    const whatsappMessage =
+
+`🏐 *NEW MATCH REQUEST*
+
+*Team Name:* ${teamName}
+
+*Contact Person:* ${contact}
+
+*Phone / WhatsApp:* ${phone}
+
+*Email:* ${email || "Not provided"}
+
+*Preferred Date:* ${date}
+
+*Preferred Time:* ${time}
+
+*Venue:* ${venue}
+
+*Match Type:* ${matchType}
+
+*Additional Message:*
+${message || "No additional message"}
+
+━━━━━━━━━━━━━━━━━━
+*Chaka to Chaka Volleyball Team*`;
+
+
+    // Encode message for WhatsApp
+    const encodedMessage =
+        encodeURIComponent(whatsappMessage);
+
+
+    // Open WhatsApp
+    const whatsappURL =
+        `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+
+});
+
+/* ================= PARTICLES ================= */
+
+const canvas =
+    document.getElementById("particles");
+
+const ctx =
+    canvas.getContext("2d");
+
+let particles = [];
+
+function resizeCanvas(){
+
+    canvas.width =
+        window.innerWidth;
+
+    canvas.height =
+        window.innerHeight;
+
+}
+
+resizeCanvas();
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+
+for(let i = 0; i < 70; i++){
+
+    particles.push({
+
+        x:Math.random()*canvas.width,
+
+        y:Math.random()*canvas.height,
+
+        size:Math.random()*2+0.5,
+
+        speedX:(Math.random()-.5)*0.4,
+
+        speedY:(Math.random()-.5)*0.4
+
+    });
+
+}
+
+
+function animateParticles(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    particles.forEach(p => {
+
+        p.x += p.speedX;
+        p.y += p.speedY;
+
+
+        if(p.x < 0 || p.x > canvas.width)
+            p.speedX *= -1;
+
+        if(p.y < 0 || p.y > canvas.height)
+            p.speedY *= -1;
+
+
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x,
+            p.y,
+            p.size,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fillStyle =
+            "rgba(0,212,255,.45)";
+
+        ctx.fill();
+
+    });
+
+
+    requestAnimationFrame(
+        animateParticles
+    );
+
+}
+
+animateParticles();
+
+</script>
+
+</body>
+</html>
