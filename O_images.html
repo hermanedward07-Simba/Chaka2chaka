@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chaka to Chaka | Match Images</title>
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #020617;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        header {
+            height: 70px;
+            width: 100%;
+
+            background: rgba(2, 6, 23, 0.97);
+
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            z-index: 1000;
+        }
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: white;
+            text-decoration: none;
+
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+
+        .logo img {
+            width: 42px;
+            height: 42px;
+
+            object-fit: contain;
+        }
+
+
+        .logo span {
+            color: #00d4ff;
+        }
+
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+
+            gap: 30px;
+        }
+
+
+        .nav-links a {
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 500;
+
+            transition: 0.3s;
+        }
+
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #00d4ff;
+        }
+
+
+        .menu-btn {
+            display: none;
+
+            color: #00d4ff;
+
+            font-size: 25px;
+
+            cursor: pointer;
+        }
+
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+
+            top: 0;
+            right: -280px;
+
+            width: 280px;
+            height: 100vh;
+
+            background: #020617;
+
+            border-left: 1px solid rgba(0, 212, 255, 0.3);
+
+            padding: 90px 30px;
+
+            z-index: 2000;
+
+            transition: 0.4s;
+        }
+
+
+        .sidebar.active {
+            right: 0;
+        }
+
+
+        .sidebar a {
+            display: block;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 15px 0;
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+            transition: 0.3s;
+        }
+
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            color: #00d4ff;
+
+            padding-left: 8px;
+        }
+
+
+        .close-btn {
+            position: absolute;
+
+            top: 25px;
+            right: 25px;
+
+            color: #00d4ff;
+
+            font-size: 25px;
+
+            cursor: pointer;
+        }
+
+
+        /* ================= PAGE HEADER ================= */
+
+        .page-header {
+            text-align: center;
+
+            padding: 135px 20px 45px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .page-header h1 {
+            font-size: 42px;
+
+            font-weight: 700;
+
+            margin-bottom: 12px;
+        }
+
+
+        .page-header h1 span {
+            color: #00d4ff;
+        }
+
+
+        .page-header p {
+            max-width: 650px;
+
+            margin: auto;
+
+            color: #94a3b8;
+
+            font-size: 15px;
+
+            line-height: 1.8;
+        }
+
+
+        /* ================= IMAGE GALLERY ================= */
+
+        .image-container {
+            width: 86%;
+
+            max-width: 1200px;
+
+            margin: 15px auto 80px;
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 22px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        /* ================= IMAGE CARD ================= */
+
+        .image-card {
+            position: relative;
+
+            height: 240px;
+
+            background: #0f172a;
+
+            border: 1px solid rgba(0, 212, 255, 0.2);
+
+            border-radius: 16px;
+
+            overflow: hidden;
+
+            cursor: pointer;
+
+            transition: 0.4s;
+        }
+
+
+        .image-card:hover {
+            transform: translateY(-6px);
+
+            border-color: #00d4ff;
+
+            box-shadow:
+                0 10px 30px rgba(0, 212, 255, 0.15);
+        }
+
+
+        .image-card img {
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition: 0.5s;
+        }
+
+
+        .image-card:hover img {
+            transform: scale(1.06);
+        }
+
+
+        /* ================= IMAGE OVERLAY ================= */
+
+        .image-overlay {
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            padding: 45px 18px 18px;
+
+            background:
+                linear-gradient(
+                    transparent,
+                    rgba(0, 0, 0, 0.9)
+                );
+
+            opacity: 0;
+
+            transition: 0.3s;
+        }
+
+
+        .image-card:hover .image-overlay {
+            opacity: 1;
+        }
+
+
+        .image-overlay h3 {
+            font-size: 16px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .image-overlay p {
+            color: #cbd5e1;
+
+            font-size: 11px;
+        }
+
+
+        /* ================= VIEW ICON ================= */
+
+        .view-icon {
+            position: absolute;
+
+            top: 15px;
+            right: 15px;
+
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+
+            background: rgba(0, 212, 255, 0.9);
+
+            color: #020617;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            opacity: 0;
+
+            transform: scale(0.7);
+
+            transition: 0.3s;
+        }
+
+
+        .image-card:hover .view-icon {
+            opacity: 1;
+
+            transform: scale(1);
+        }
+
+
+        /* ================= LIGHTBOX ================= */
+
+        .lightbox {
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0, 0, 0, 0.94);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 30px;
+
+            z-index: 5000;
+        }
+
+
+        .lightbox.active {
+            display: flex;
+        }
+
+
+        .lightbox-content {
+            position: relative;
+
+            width: 90%;
+
+            max-width: 1000px;
+
+            text-align: center;
+        }
+
+
+        .lightbox-content img {
+            max-width: 100%;
+
+            max-height: 75vh;
+
+            object-fit: contain;
+
+            border-radius: 10px;
+
+            border: 1px solid rgba(0, 212, 255, 0.25);
+
+            box-shadow:
+                0 0 40px rgba(0, 212, 255, 0.12);
+        }
+
+
+        .lightbox-info {
+            margin-top: 15px;
+        }
+
+
+        .lightbox-info h2 {
+            font-size: 20px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .lightbox-info p {
+            color: #94a3b8;
+
+            font-size: 13px;
+        }
+
+
+        .lightbox-close {
+            position: absolute;
+
+            top: -50px;
+            right: 0;
+
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+
+            background: #00d4ff;
+
+            color: #020617;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            transition: 0.3s;
+        }
+
+
+        .lightbox-close:hover {
+            background: white;
+
+            transform: rotate(90deg);
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            border-top: 1px solid rgba(0, 212, 255, 0.15);
+
+            text-align: center;
+
+            padding: 30px 20px;
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        footer span {
+            color: #00d4ff;
+        }
+
+
+        .social-links {
+            margin-top: 15px;
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 18px;
+        }
+
+
+        .social-links a {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #00d4ff;
+
+            border: 1px solid rgba(0, 212, 255, 0.3);
+
+            text-decoration: none;
+
+            transition: 0.3s;
+        }
+
+
+        .social-links a:hover {
+            background: #00d4ff;
+
+            color: #020617;
+
+            transform: translateY(-4px);
+        }
+
+
+        /* ================= PARTICLES ================= */
+
+        #particles {
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            z-index: 0;
+        }
+
+
+        .particle {
+            position: absolute;
+
+            width: 2px;
+            height: 2px;
+
+            background: #00d4ff;
+
+            border-radius: 50%;
+
+            opacity: 0.5;
+
+            animation: float 8s linear infinite;
+        }
+
+
+        @keyframes float {
+
+            from {
+                transform: translateY(100vh);
+            }
+
+            to {
+                transform: translateY(-10vh);
+            }
+
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1000px) {
+
+            .image-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 750px) {
+
+            .nav-links {
+                display: none;
+            }
+
+
+            .menu-btn {
+                display: block;
+            }
+
+
+            .image-container {
+                width: 90%;
+
+                grid-template-columns: 1fr;
+
+                gap: 18px;
+            }
+
+
+            .image-card {
+                height: 240px;
+            }
+
+
+            .page-header {
+                padding-top: 120px;
+            }
+
+
+            .page-header h1 {
+                font-size: 34px;
+            }
+
+        }
+
+
+        @media (max-width: 450px) {
+
+            header {
+                padding: 0 5%;
+            }
+
+
+            .logo {
+                font-size: 17px;
+            }
+
+
+            .page-header h1 {
+                font-size: 29px;
+            }
+
+
+            .page-header p {
+                font-size: 13px;
+            }
+
+
+            .image-card {
+                height: 220px;
+            }
+
+
+            .lightbox {
+                padding: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= PARTICLES ================= -->
+
+    <div id="particles"></div>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header>
+
+        <a href="index.html" class="logo">
+
+            <img
+                src="Chaka tu chaka.png"
+                alt="Chaka to Chaka Logo"
+            >
+
+            Chaka <span>to Chaka</span>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="index.html">Home</a>
+
+            <a href="about.html">Squad</a>
+
+            <a href="Matches.html">Schedule</a>
+
+            <a href="Gallery.html" class="active">Gallery</a>
+
+            <a href="Request.html">Request</a>
+
+        </nav>
+
+
+        <div class="menu-btn" onclick="openSidebar()">
+
+            <i class="fas fa-bars"></i>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= MOBILE SIDEBAR ================= -->
+
+    <div class="sidebar" id="sidebar">
+
+        <div class="close-btn" onclick="closeSidebar()">
+
+            <i class="fas fa-times"></i>
+
+        </div>
+
+
+        <a href="index.html">Home</a>
+
+        <a href="about.html">Squad</a>
+
+        <a href="Matches.html">Schedule</a>
+
+        <a href="Gallery.html" class="active">Gallery</a>
+
+        <a href="Request.html">Request</a>
+
+    </div>
+
+
+    <!-- ================= PAGE HEADER ================= -->
+
+    <section class="page-header">
+
+        <h1>
+            Match <span>Images</span>
+        </h1>
+
+        <p>
+            Explore memorable moments captured during
+            Chaka to Chaka volleyball matches.
+        </p>
+
+    </section>
+
+
+    <!-- ================= IMAGE GALLERY ================= -->
+
+    <section class="image-container">
+
+
+        <!-- IMAGE 1 -->
+
+        <div
+            class="image-card"
+            onclick="openImage(
+                'images/gallery/match1.jpg',
+                'Match Moment',
+                'A memorable moment from the match.'
+            )"
+        >
+
+            <img
+                src="images/gallery/match1.jpg"
+                alt="Chaka to Chaka Match"
+            >
+
+            <div class="view-icon">
+                <i class="fas fa-expand"></i>
+            </div>
+
+
+            <div class="image-overlay">
+
+                <h3>Match Moment</h3>
+
+                <p>
+                    Chaka to Chaka volleyball match.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- IMAGE 2 -->
+
+        <div
+            class="image-card"
+            onclick="openImage(
+                'images/gallery/match2.jpg',
+                'Game Action',
+                'Action captured during the game.'
+            )"
+        >
+
+            <img
+                src="images/gallery/match2.jpg"
+                alt="Match Action"
+            >
+
+            <div class="view-icon">
+                <i class="fas fa-expand"></i>
+            </div>
+
+
+            <div class="image-overlay">
+
+                <h3>Game Action</h3>
+
+                <p>
+                    An exciting moment on the court.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- IMAGE 3 -->
+
+        <div
+            class="image-card"
+            onclick="openImage(
+                'images/gallery/match3.jpg',
+                'Team In Action',
+                'The team competing on the court.'
+            )"
+        >
+
+            <img
+                src="images/gallery/match3.jpg"
+                alt="Team In Action"
+            >
+
+            <div class="view-icon">
+                <i class="fas fa-expand"></i>
+            </div>
+
+
+            <div class="image-overlay">
+
+                <h3>Team In Action</h3>
+
+                <p>
+                    Teamwork and determination in action.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- IMAGE 4 -->
+
+        <div
+            class="image-card"
+            onclick="openImage(
+                'images/gallery/match4.jpg',
+                'Powerful Play',
+                'A powerful play captured during the match.'
+            )"
+        >
+
+            <img
+                src="images/gallery/match4.jpg"
+                alt="Powerful Play"
+            >
+
+            <div class="view-icon">
+                <i class="fas fa-expand"></i>
+            </div>
+
+
+            <div class="image-overlay">
+
+                <h3>Powerful Play</h3>
+
+                <p>
+                    A memorable volleyball moment.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- IMAGE 5 -->
+
+        <div
+            class="image-card"
+            onclick="openImage(
+                'images/gallery/match5.jpg',
+                'Team Spirit',
+                'The spirit and energy of Chaka to Chaka.'
+            )"
+        >
+
+            <img
+                src="images/gallery/match5.jpg"
+                alt="Team Spirit"
+            >
+
+            <div class="view-icon">
+                <i class="fas fa-expand"></i>
+            </div>
+
+
+            <div class="image-overlay">
+
+                <h3>Team Spirit</h3>
+
+                <p>
+                    The team showing great energy.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- IMAGE 6 -->
+
+        <div
+            class="image-card"
+            onclick="openImage(
+                'images/gallery/match6.jpg',
+                'On The Court',
+                'Another memorable match moment.'
+            )"
+        >
+
+            <img
+                src="images/gallery/match6.jpg"
+                alt="On The Court"
+            >
+
+            <div class="view-icon">
+                <i class="fas fa-expand"></i>
+            </div>
+
+
+            <div class="image-overlay">
+
+                <h3>On The Court</h3>
+
+                <p>
+                    Another unforgettable game moment.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- ================= LIGHTBOX ================= -->
+
+    <div
+        class="lightbox"
+        id="lightbox"
+        onclick="closeLightbox(event)"
+    >
+
+        <div
+            class="lightbox-content"
+            onclick="event.stopPropagation()"
+        >
+
+            <div
+                class="lightbox-close"
+                onclick="closeLightbox()"
+            >
+                <i class="fas fa-times"></i>
+            </div>
+
+
+            <img
+                id="lightboxImage"
+                src=""
+                alt=""
+            >
+
+
+            <div class="lightbox-info">
+
+                <h2 id="lightboxTitle"></h2>
+
+                <p id="lightboxDescription"></p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            © 2026
+            <span>Chaka to Chaka Volleyball Team</span>.
+            All Rights Reserved.
+        </p>
+
+
+        <div class="social-links">
+
+            <a
+                href="https://wa.me/255754657240"
+                target="_blank"
+            >
+                <i class="fab fa-whatsapp"></i>
+            </a>
+
+
+            <a
+                href="https://www.instagram.com/chaka_to_chaka_volleyball/"
+                target="_blank"
+            >
+                <i class="fab fa-instagram"></i>
+            </a>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /* ================= SIDEBAR ================= */
+
+        function openSidebar() {
+
+            document
+                .getElementById("sidebar")
+                .classList
+                .add("active");
+
+        }
+
+
+        function closeSidebar() {
+
+            document
+                .getElementById("sidebar")
+                .classList
+                .remove("active");
+
+        }
+
+
+        /* ================= OPEN IMAGE ================= */
+
+        function openImage(image, title, description) {
+
+            document
+                .getElementById("lightboxImage")
+                .src = image;
+
+
+            document
+                .getElementById("lightboxTitle")
+                .textContent = title;
+
+
+            document
+                .getElementById("lightboxDescription")
+                .textContent = description;
+
+
+            document
+                .getElementById("lightbox")
+                .classList
+                .add("active");
+
+        }
+
+
+        /* ================= CLOSE IMAGE ================= */
+
+        function closeLightbox(event) {
+
+            if (
+                event &&
+                event.target !== event.currentTarget
+            ) {
+                return;
+            }
+
+
+            document
+                .getElementById("lightbox")
+                .classList
+                .remove("active");
+
+        }
+
+
+        /* ================= ESC KEY ================= */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Escape") {
+
+                    closeLightbox();
+
+                }
+
+            }
+        );
+
+
+        /* ================= PARTICLES ================= */
+
+        const particles =
+            document.getElementById("particles");
+
+
+        for (let i = 0; i < 45; i++) {
+
+            const particle =
+                document.createElement("div");
+
+
+            particle.classList.add("particle");
+
+
+            particle.style.left =
+                Math.random() * 100 + "%";
+
+
+            particle.style.animationDuration =
+                (5 + Math.random() * 8) + "s";
+
+
+            particle.style.animationDelay =
+                Math.random() * 5 + "s";
+
+
+            particles.appendChild(particle);
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
