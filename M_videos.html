@@ -19,10 +19,16 @@
 
     <style>
 
+        /* ================= GLOBAL ================= */
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -31,6 +37,7 @@
             color: white;
             min-height: 100vh;
         }
+
 
         /* ================= NAVBAR ================= */
 
@@ -65,11 +72,14 @@
 
             font-size: 20px;
             font-weight: 700;
+
+            white-space: nowrap;
         }
 
         .logo img {
             width: 42px;
             height: 42px;
+
             object-fit: contain;
         }
 
@@ -79,6 +89,7 @@
 
         .nav-links {
             display: flex;
+            align-items: center;
             gap: 30px;
         }
 
@@ -99,10 +110,14 @@
 
         .menu-btn {
             display: none;
+
             color: #00d4ff;
+
             font-size: 25px;
+
             cursor: pointer;
         }
+
 
         /* ================= SIDEBAR ================= */
 
@@ -146,6 +161,7 @@
         .sidebar a:hover,
         .sidebar a.active {
             color: #00d4ff;
+
             padding-left: 8px;
         }
 
@@ -162,16 +178,18 @@
             cursor: pointer;
         }
 
-        /* ================= HEADER ================= */
+
+        /* ================= PAGE HEADER ================= */
 
         .page-header {
             text-align: center;
 
-            padding: 135px 20px 50px;
+            padding: 135px 20px 45px;
         }
 
         .page-header h1 {
             font-size: 42px;
+
             margin-bottom: 12px;
         }
 
@@ -191,6 +209,7 @@
             line-height: 1.8;
         }
 
+
         /* ================= VIDEO GRID ================= */
 
         .video-container {
@@ -198,6 +217,7 @@
             max-width: 1200px;
 
             margin: auto;
+
             margin-bottom: 80px;
 
             display: grid;
@@ -206,6 +226,7 @@
 
             gap: 25px;
         }
+
 
         /* ================= VIDEO CARD ================= */
 
@@ -219,6 +240,8 @@
             overflow: hidden;
 
             transition: 0.3s;
+
+            min-width: 0;
         }
 
         .video-card:hover {
@@ -230,27 +253,37 @@
                 0 10px 30px rgba(0, 212, 255, 0.15);
         }
 
-/* ================= VIDEO ================= */
 
-.video-box {
-    width: 100%;
-    height: 180px;
-    background: #000;
-    overflow: hidden;
-}
+        /* ================= GOOGLE DRIVE VIDEO ================= */
 
-.video-box video {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: contain;
-    background: #000;
-}
+        .video-box {
+            width: 100%;
+
+            height: 180px;
+
+            background: #000;
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+        .video-box iframe {
+            width: 100%;
+            height: 100%;
+
+            border: none;
+
+            display: block;
+
+            background: #000;
+        }
+
 
         /* ================= INFORMATION ================= */
 
         .video-info {
-            padding: 18px;
+            padding: 17px;
         }
 
         .video-info h3 {
@@ -284,6 +317,7 @@
 
             border: 1px solid rgba(0, 212, 255, 0.2);
         }
+
 
         /* ================= FOOTER ================= */
 
@@ -335,8 +369,10 @@
 
         .social-links a:hover {
             background: #00d4ff;
+
             color: #020617;
         }
+
 
         /* ================= RESPONSIVE ================= */
 
@@ -346,7 +382,12 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
+            .nav-links {
+                gap: 20px;
+            }
+
         }
+
 
         @media (max-width: 750px) {
 
@@ -362,13 +403,24 @@
                 width: 90%;
 
                 grid-template-columns: 1fr;
+
+                gap: 20px;
+            }
+
+            .page-header {
+                padding-top: 120px;
             }
 
             .page-header h1 {
                 font-size: 34px;
             }
 
+            .video-box {
+                height: 200px;
+            }
+
         }
+
 
         @media (max-width: 450px) {
 
@@ -378,14 +430,41 @@
 
             .logo {
                 font-size: 17px;
+
+                gap: 7px;
+            }
+
+            .logo img {
+                width: 38px;
+                height: 38px;
+            }
+
+            .page-header {
+                padding: 115px 18px 35px;
             }
 
             .page-header h1 {
                 font-size: 29px;
             }
 
-            .video-box video {
-                height: 210px;
+            .page-header p {
+                font-size: 13px;
+            }
+
+            .video-container {
+                width: 92%;
+            }
+
+            .video-box {
+                height: 200px;
+            }
+
+            .video-info {
+                padding: 15px;
+            }
+
+            .video-info h3 {
+                font-size: 16px;
             }
 
         }
@@ -483,24 +562,17 @@
     <section class="video-container">
 
 
-        <!-- VIDEO 1 -->
+        <!-- ================= VIDEO 1 ================= -->
 
         <div class="video-card">
 
             <div class="video-box">
 
-                <video
-                    controls
-                    preload="metadata"
-                >
-                    <source
-                        src="one.mp4"
-                        type="video/mp4"
-                    >
-
-                    Your browser does not support video playback.
-
-                </video>
+                <iframe
+                  src="https://drive.google.com/file/d/1GYy-TQoqP4VuRd_d85XFU6db1i5GH91i/preview"
+                  allow="autoplay"
+                  allowfullscreen>
+               </iframe> 
 
             </div>
 
@@ -523,24 +595,17 @@
         </div>
 
 
-        <!-- VIDEO 2 -->
+        <!-- ================= VIDEO 2 ================= -->
 
         <div class="video-card">
 
             <div class="video-box">
 
-                <video
-                    controls
-                    preload="metadata"
-                >
-                    <source
-                        src="emoji.mp4"
-                        type="video/mp4"
-                    >
-
-                    Your browser does not support video playback.
-
-                </video>
+                <iframe
+    src="https://drive.google.com/file/d/1NIqHtqnJsAtKZ7D7joLREpcGSylt65jA/preview"
+    allow="autoplay"
+    allowfullscreen>
+</iframe>
 
             </div>
 
@@ -563,24 +628,17 @@
         </div>
 
 
-        <!-- VIDEO 3 -->
+        <!-- ================= VIDEO 3 ================= -->
 
         <div class="video-card">
 
             <div class="video-box">
 
-                <video
-                    controls
-                    preload="metadata"
-                >
-                    <source
-                        src="images/gallery/videos/match3.mp4"
-                        type="video/mp4"
-                    >
-
-                    Your browser does not support video playback.
-
-                </video>
+                <iframe
+    src="https://drive.google.com/file/d/1o_4sH5vtKkVE0CsKffrqmLlWP5dv9p2W/preview"
+    allow="autoplay"
+    allowfullscreen>
+</iframe>
 
             </div>
 
@@ -603,24 +661,17 @@
         </div>
 
 
-        <!-- VIDEO 4 -->
+        <!-- ================= VIDEO 4 ================= -->
 
         <div class="video-card">
 
             <div class="video-box">
 
-                <video
-                    controls
-                    preload="metadata"
-                >
-                    <source
-                        src="images/gallery/videos/match4.mp4"
-                        type="video/mp4"
-                    >
-
-                    Your browser does not support video playback.
-
-                </video>
+                <iframe
+    src="https://drive.google.com/file/d/1746FIdofaO5NjZOwIgF18WDIpRZH69N4/preview"
+    allow="autoplay"
+    allowfullscreen>
+</iframe>
 
             </div>
 
