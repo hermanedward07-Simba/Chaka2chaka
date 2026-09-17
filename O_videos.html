@@ -36,6 +36,7 @@
             background: #020617;
             color: white;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
 
@@ -254,29 +255,44 @@
         }
 
 
-        /* ================= GOOGLE DRIVE VIDEO ================= */
+        /* ================= RESPONSIVE GOOGLE DRIVE VIDEO ================= */
 
         .video-box {
             width: 100%;
 
-            height: 180px;
+            /*
+             * Keeps the video proportional on desktop
+             * and mobile devices.
+             */
+            aspect-ratio: 16 / 9;
 
             background: #000;
 
             overflow: hidden;
 
             position: relative;
+
+            isolation: isolate;
         }
 
         .video-box iframe {
             width: 100%;
             height: 100%;
 
+            min-width: 100%;
+            min-height: 100%;
+
             border: none;
 
             display: block;
 
             background: #000;
+
+            /*
+             * Helps Google Drive player behave correctly
+             * on mobile browsers.
+             */
+            vertical-align: middle;
         }
 
 
@@ -374,7 +390,7 @@
         }
 
 
-        /* ================= RESPONSIVE ================= */
+        /* ================= TABLET ================= */
 
         @media (max-width: 1000px) {
 
@@ -388,6 +404,8 @@
 
         }
 
+
+        /* ================= MOBILE ================= */
 
         @media (max-width: 750px) {
 
@@ -415,12 +433,27 @@
                 font-size: 34px;
             }
 
+            /*
+             * No fixed height here.
+             * The aspect-ratio controls the height automatically.
+             */
             .video-box {
-                height: 200px;
+                aspect-ratio: 16 / 9;
+
+                height: auto;
+
+                width: 100%;
+            }
+
+            .video-box iframe {
+                width: 100%;
+                height: 100%;
             }
 
         }
 
+
+        /* ================= SMALL PHONES ================= */
 
         @media (max-width: 450px) {
 
@@ -453,10 +486,16 @@
 
             .video-container {
                 width: 92%;
+
+                gap: 18px;
             }
 
             .video-box {
-                height: 200px;
+                aspect-ratio: 16 / 9;
+
+                height: auto;
+
+                border-radius: 0;
             }
 
             .video-info {
@@ -465,6 +504,34 @@
 
             .video-info h3 {
                 font-size: 16px;
+            }
+
+            .video-info p {
+                font-size: 12px;
+            }
+
+        }
+
+
+        /* ================= VERY SMALL PHONES ================= */
+
+        @media (max-width: 360px) {
+
+            .logo {
+                font-size: 15px;
+            }
+
+            .logo img {
+                width: 35px;
+                height: 35px;
+            }
+
+            .page-header h1 {
+                font-size: 26px;
+            }
+
+            .video-container {
+                width: 94%;
             }
 
         }
@@ -508,7 +575,11 @@
         </nav>
 
 
-        <div class="menu-btn" onclick="openSidebar()">
+        <div
+            class="menu-btn"
+            onclick="openSidebar()"
+            aria-label="Open menu"
+        >
 
             <i class="fas fa-bars"></i>
 
@@ -521,7 +592,11 @@
 
     <div class="sidebar" id="sidebar">
 
-        <div class="close-btn" onclick="closeSidebar()">
+        <div
+            class="close-btn"
+            onclick="closeSidebar()"
+            aria-label="Close menu"
+        >
 
             <i class="fas fa-times"></i>
 
@@ -569,25 +644,27 @@
             <div class="video-box">
 
                 <iframe
-    src="https://drive.google.com/file/d/1ck52OFCuU8Sv7II60ZATj34dRjRja-_h/preview"
-    allow="autoplay"
-    allowfullscreen>
-</iframe>
+                    src="https://drive.google.com/file/d/1ck52OFCuU8Sv7II60ZATj34dRjRja-_h/preview"
+                    title="Match Highlights"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowfullscreen
+                    referrerpolicy="strict-origin-when-cross-origin">
+                </iframe>
 
             </div>
 
 
             <div class="video-info">
 
-                <h3>Match Highlights</h3>
+                <h3>Chaka To Chaka Family</h3>
 
                 <p>
-                    Highlights from one of our memorable
-                    volleyball matches.
+                Happiest family, Same ambition, fully of energy
+                and ready for the match.
                 </p>
 
                 <span class="video-tag">
-                    Match
+                    Family
                 </span>
 
             </div>
@@ -601,26 +678,28 @@
 
             <div class="video-box">
 
-     <iframe
-    src="https://drive.google.com/file/d/1sLi_pCXJ_ehB1XLWh_Wl9lMFKLOr1QFj/preview"
-    allow="autoplay"
-    allowfullscreen>
-</iframe>
+                <iframe
+                    src="https://drive.google.com/file/d/1sLi_pCXJ_ehB1XLWh_Wl9lMFKLOr1QFj/preview"
+                    title="Game Highlights"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowfullscreen
+                    referrerpolicy="strict-origin-when-cross-origin">
+                </iframe>
 
             </div>
 
 
             <div class="video-info">
 
-                <h3>Game Highlights</h3>
+                <h3>Moments</h3>
 
                 <p>
-                    Exciting moments captured during
+                    Exciting moments captured after
                     the volleyball game.
                 </p>
 
                 <span class="video-tag">
-                    Highlights
+                    Vibe
                 </span>
 
             </div>
@@ -634,22 +713,24 @@
 
             <div class="video-box">
 
-    <iframe
-    src="https://drive.google.com/file/d/1c7QJgXDHxQyEs_qDXbTGB-kWOTFBHqn0/preview"
-    allow="autoplay"
-    allowfullscreen>
-</iframe>
+                <iframe
+                    src="https://drive.google.com/file/d/1c7QJgXDHxQyEs_qDXbTGB-kWOTFBHqn0/preview"
+                    title="Team Performance"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowfullscreen
+                    referrerpolicy="strict-origin-when-cross-origin">
+                </iframe>
 
             </div>
 
 
             <div class="video-info">
 
-                <h3>Team Performance</h3>
+                <h3>Pure love</h3>
 
                 <p>
                     A look at the team giving their best
-                    on the volleyball court.
+                    out of the court.
                 </p>
 
                 <span class="video-tag">
@@ -667,11 +748,13 @@
 
             <div class="video-box">
 
-     <iframe
-    src="https://drive.google.com/file/d/1OMffEq3kNsZX7MBrv_Cf1iAHuSLqsdJN/preview"
-    allow="autoplay"
-    allowfullscreen>
-</iframe>
+                <iframe
+                    src="https://drive.google.com/file/d/1OMffEq3kNsZX7MBrv_Cf1iAHuSLqsdJN/preview"
+                    title="Powerful Moments"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowfullscreen
+                    referrerpolicy="strict-origin-when-cross-origin">
+                </iframe>
 
             </div>
 
@@ -686,7 +769,7 @@
                 </p>
 
                 <span class="video-tag">
-                    Match
+                   After Match
                 </span>
 
             </div>
@@ -713,6 +796,8 @@
             <a
                 href="https://wa.me/255754657240"
                 target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
             >
                 <i class="fab fa-whatsapp"></i>
             </a>
@@ -721,6 +806,8 @@
             <a
                 href="https://www.instagram.com/chaka_to_chaka_volleyball/"
                 target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
             >
                 <i class="fab fa-instagram"></i>
             </a>
@@ -752,6 +839,21 @@
                 .remove("active");
 
         }
+
+
+        /* Close sidebar when clicking a navigation link */
+
+        document
+            .querySelectorAll(".sidebar a")
+            .forEach(function(link) {
+
+                link.addEventListener("click", function() {
+
+                    closeSidebar();
+
+                });
+
+            });
 
     </script>
 
